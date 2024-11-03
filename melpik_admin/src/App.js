@@ -1,4 +1,3 @@
-// src/App.js
 import React, { Suspense } from 'react';
 import {
   BrowserRouter as Router,
@@ -11,7 +10,6 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './styles/GlobalStyle';
 import Theme from './styles/Theme';
 
-// Lazy-load the AdminLogin component
 const AdminLogin = React.lazy(() => import('./pages/AdminLogin'));
 
 function App() {
@@ -40,9 +38,8 @@ function App() {
 
 export default App;
 
-// Style for lazy-loading fallback
 const LoadingMessage = styled.div`
-  color: yellow; /* 노란색으로 스타일링 */
+  color: yellow;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
