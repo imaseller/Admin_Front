@@ -25,6 +25,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    min-width: 1024px; /* 아이패드 프로 11 너비 고정 */
+    min-height: 1366px; /* 아이패드 프로 11 높이 고정 */
+    width: 100%; /* 너비는 100%로 설정 */
+    height: 100%; /* 높이는 100%로 설정 */
+    overflow: hidden; /* 콘텐츠가 넘칠 경우 숨김 처리 */
   }
 
   ol, ul {

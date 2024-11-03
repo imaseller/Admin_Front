@@ -25,7 +25,6 @@ import ProductList from '../src/components/Service/ProductList.js';
 import ProductDetail from '../src/components/Service/ProductDetail.js';
 
 const List = lazyLoad(() => import('./pages/List'));
-const renderWithLayout = (Component) => <Component />;
 
 function App() {
   const renderWithLayout = (Component) => (
