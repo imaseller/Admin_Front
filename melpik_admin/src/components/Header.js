@@ -5,7 +5,7 @@ const Header = ({ onToggle }) => {
   return (
     <HeaderContainer>
       <h1>Melpik Admin</h1>
-      <ToggleButton onClick={onToggle}>Toggle Menu</ToggleButton>
+      <ToggleButton onClick={onToggle}>Side Menu</ToggleButton>
     </HeaderContainer>
   );
 };
@@ -33,6 +33,6 @@ const ToggleButton = styled.button`
   margin-left: 40px;
   cursor: pointer;
   &:hover {
-    background-color: ${({ theme }) => theme.colors.PrimaryDark};
+    background-color: ${({ theme }) => theme.colors.blue};
   }
 `;

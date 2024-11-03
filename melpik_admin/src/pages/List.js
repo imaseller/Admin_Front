@@ -160,9 +160,6 @@ const SubMenuItem = styled.div`
 
 const MainContent = styled.div`
   flex: 1;
-  width: 100px;
   display: flex;
-  flex-direction: column;
-  padding: 20px;
   background-color: ${({ theme }) => theme.colors.WhiteBrown1};
 `;
