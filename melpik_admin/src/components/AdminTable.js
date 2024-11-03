@@ -52,10 +52,12 @@ const Table = styled.table`
 
   th,
   td {
-    padding: 12px 15px;
+    padding: 12px 5px;
+    text-align: left;
+    min-width: 50px;
+    border-bottom: 1px solid #ddd;
     border: 1px solid ${({ theme }) => theme.colors.gray};
     text-align: center;
-    font-size: ${({ theme }) => theme.fonts.default.fontSize};
   }
 
   th {

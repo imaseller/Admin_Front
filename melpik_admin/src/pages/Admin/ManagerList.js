@@ -4,9 +4,9 @@ import styled, { ThemeProvider } from 'styled-components';
 import Theme from '../../styles/Theme';
 import { AdminGet } from '../../api/admin/AdminGet';
 import { deleteAdmin } from '../../api/admin/AdminIdDelete';
-import Header from '../../components/AdminMananger/Header';
-import AdminTable from '../../components/AdminMananger/AdminTable';
-import Pagination from '../../components/AdminMananger/Paination';
+import Header from '../../components/HeaderTitle';
+import AdminTable from '../../components/AdminTable';
+import Pagination from '../../components/Paination';
 
 const ManagerList = () => {
   const navigate = useNavigate();
