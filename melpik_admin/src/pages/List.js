@@ -35,52 +35,46 @@ const List = () => {
           <Navigation>
             <NavItem onClick={() => navigate('/dashboard')}>Dash Board</NavItem>
             <NavItem onClick={handleManagerMenuToggle}>관리자 관리</NavItem>
-            {isManagerMenuOpen && (
-              <SubMenu>
-                <SubMenuItem onClick={() => navigate('/admin')}>
-                  관리자 목록
-                </SubMenuItem>
-                <SubMenuItem onClick={() => navigate('/blockmanagerlist')}>
-                  블럭 관리자 목록
-                </SubMenuItem>
-              </SubMenu>
-            )}
+            <SubMenu isOpen={isManagerMenuOpen}>
+              <SubMenuItem onClick={() => navigate('/admin')}>
+                관리자 목록
+              </SubMenuItem>
+              <SubMenuItem onClick={() => navigate('/blockmanagerlist')}>
+                블럭 관리자 목록
+              </SubMenuItem>
+            </SubMenu>
             <NavItem onClick={handleMemberMenuToggle}>회원 관리</NavItem>
-            {isMemberMenuOpen && (
-              <SubMenu>
-                <SubMenuItem onClick={() => navigate('/user')}>
-                  회원 목록
-                </SubMenuItem>
-                <SubMenuItem onClick={() => navigate('/user/blocked')}>
-                  블록 회원 목록
-                </SubMenuItem>
-                <SubMenuItem onClick={() => navigate('/reviewlist')}>
-                  사용후기 목록
-                </SubMenuItem>
-              </SubMenu>
-            )}
+            <SubMenu isOpen={isMemberMenuOpen}>
+              <SubMenuItem onClick={() => navigate('/user')}>
+                회원 목록
+              </SubMenuItem>
+              <SubMenuItem onClick={() => navigate('/user/blocked')}>
+                블록 회원 목록
+              </SubMenuItem>
+              <SubMenuItem onClick={() => navigate('/reviewlist')}>
+                사용후기 목록
+              </SubMenuItem>
+            </SubMenu>
             <NavItem onClick={handleServiceMenuToggle}>서비스 관리</NavItem>
-            {isServiceMenuOpen && (
-              <SubMenu>
-                <SubMenuItem onClick={() => navigate('/productlist')}>
-                  제품 관리
-                </SubMenuItem>
-                <SubMenuItem onClick={() => navigate('/brandlist')}>
-                  브랜드 관리
-                </SubMenuItem>
-                <SubMenuItem onClick={() => navigate('/schedulelist')}>
-                  예정제품 관리
-                </SubMenuItem>
-              </SubMenu>
-            )}
+            <SubMenu isOpen={isServiceMenuOpen}>
+              <SubMenuItem onClick={() => navigate('/productlist')}>
+                제품 관리
+              </SubMenuItem>
+              <SubMenuItem onClick={() => navigate('/brandlist')}>
+                브랜드 관리
+              </SubMenuItem>
+              <SubMenuItem onClick={() => navigate('/schedulelist')}>
+                예정제품 관리
+              </SubMenuItem>
+            </SubMenu>
             <NavItem>결제 관리</NavItem>
             <NavItem>앱 설정 관리</NavItem>
             <NavItem>고객센터</NavItem>
           </Navigation>
         </Sidebar>
-        {/* <MainContent>
+        <MainContent>
           <Outlet />
-        </MainContent> */}
+        </MainContent>
       </Container>
     </ThemeProvider>
   );
@@ -147,6 +141,12 @@ const SubMenu = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 20px;
+  max-height: ${({ isOpen }) => (isOpen ? '200px' : '0')};
+  opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
+  transform: ${({ isOpen }) =>
+    isOpen ? 'translateY(0)' : 'translateY(-10px)'};
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease; /* Animation effect */
 `;
 
 const SubMenuItem = styled.div`
