@@ -54,7 +54,7 @@ const Table = styled.table`
   td {
     padding: 12px 5px;
     text-align: left;
-    min-width: 50px;
+    min-width: 60px;
     border-bottom: 1px solid #ddd;
     border: 1px solid ${({ theme }) => theme.colors.gray};
     text-align: center;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import Theme from '../../styles/Theme';
+import ReviewTable from '../../components/ReviewTable';
 
 const mockData = [
   {
@@ -30,9 +31,7 @@ const ReviewList = () => {
   };
 
   const filteredData = mockData.filter((item) => {
-    if (searchType === 'id') {
-      return item.user.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchType === 'nickname') {
+    if (searchType === 'id' || searchType === 'nickname') {
       return item.user.toLowerCase().includes(searchTerm.toLowerCase());
     } else if (searchType === 'title') {
       return item.productName.toLowerCase().includes(searchTerm.toLowerCase());
@@ -64,36 +63,11 @@ const ReviewList = () => {
         </Header>
         <Container>
           <TotalCount>총 {filteredData.length}개</TotalCount>
-          <Table>
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>제품명</th>
-                <th>브랜드</th>
-                <th>평가</th>
-                <th>이용기간</th>
-                <th>사이즈</th>
-                <th>이용자</th>
-                <th>노출여부</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredData.map((review, index) => (
-                <tr key={index}>
-                  <td>{review.no}</td>
-                  <ProductNameCell onClick={() => handleEdit(review.no)}>
-                    {review.productName}
-                  </ProductNameCell>
-                  <td>{review.brand}</td>
-                  <td>{review.rating}</td>
-                  <td>{review.usagePeriod}</td>
-                  <td>{review.size}</td>
-                  <td>{review.user}</td>
-                  <td>{review.exposure}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <ReviewTable
+            filteredData={filteredData}
+            handleEdit={handleEdit}
+          />{' '}
+          {/* Use the ReviewTable component */}
           <ActionButton onClick={handleRegister}>신규 등록</ActionButton>
           <Pagination>
             <PageButton>«</PageButton>
@@ -221,51 +195,6 @@ const TotalCount = styled.div`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: 18px;
-  }
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid ${({ theme }) => theme.colors.gray};
-
-  th,
-  td {
-    padding: 12px 15px;
-    text-align: left;
-    min-width: 60px;
-    border-bottom: 1px solid #ddd;
-    border: 1px solid ${({ theme }) => theme.colors.gray};
-    text-align: center;
-    font-size: ${({ theme }) => theme.fonts.default.fontSize};
-
-    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-      font-size: 12px;
-    }
-
-    @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-      font-size: 14px;
-    }
-
-    @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-      font-size: 16px;
-    }
-  }
-
-  th {
-    background-color: ${({ theme }) => theme.colors.WhiteBrown1};
-  }
-`;
-
-const ProductNameCell = styled.td`
-  color: #007bff;
-  cursor: pointer;
-
-  &:hover {
-    color: #0056b3;
   }
 `;
 
