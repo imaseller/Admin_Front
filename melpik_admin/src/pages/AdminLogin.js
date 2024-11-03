@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
 import LoginButton from '../components/Button01';
-import InputField from '../components/InputField';
+import InputField from '../../src/components/AdminLogin/InputField.js';
 import { AdminLoginPost } from '../api/auth/AdminLoginPost.js';
 
 const AdminLogin = () => {

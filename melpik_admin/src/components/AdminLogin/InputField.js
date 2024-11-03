@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import Button02 from "../components/Button02";
+import React from 'react';
+import styled from 'styled-components';
+import Button02 from '../../components/Button02';
 
 const InputField = React.forwardRef(
   (
@@ -9,9 +9,9 @@ const InputField = React.forwardRef(
   ) => (
     <InputContainer>
       <Label htmlFor={id} isEmpty={!label}>
-        {label.split("(")[0] || "\u200B"}
-        {label.includes("(") && (
-          <GrayText>{`(${label.split("(")[1]}`}</GrayText>
+        {label.split('(')[0] || '\u200B'}
+        {label.includes('(') && (
+          <GrayText>{`(${label.split('(')[1]}`}</GrayText>
         )}
       </Label>
       <InputWrapper>
@@ -22,8 +22,8 @@ const InputField = React.forwardRef(
           id={id}
           ref={ref}
           hasPrefix={!!prefix}
-          padding={id === "melpickAddress" ? "0" : "0 11px"}
-          hasSelect={as === "select"}
+          padding={id === 'melpickAddress' ? '0' : '0 11px'}
+          hasSelect={as === 'select'}
           {...rest}
         />
         {buttonLabel && (
@@ -35,7 +35,7 @@ const InputField = React.forwardRef(
   )
 );
 
-InputField.displayName = "InputField";
+InputField.displayName = 'InputField';
 
 export default InputField;
 
@@ -53,7 +53,7 @@ const Label = styled.label`
   font-weight: 700;
   font-size: 11px;
   line-height: 11px;
-  visibility: ${({ isEmpty }) => (isEmpty ? "hidden" : "visible")};
+  visibility: ${({ isEmpty }) => (isEmpty ? 'hidden' : 'visible')};
 `;
 
 const GrayText = styled.span`
@@ -88,7 +88,7 @@ const Input = styled.input`
   border-radius: 4px;
   padding: ${({ padding }) => padding};
   border: ${({ hasSelect, theme }) =>
-    hasSelect ? `1px solid ${theme.colors.black}` : "none"};
+    hasSelect ? `1px solid ${theme.colors.black}` : 'none'};
   flex: 1;
   height: 100%;
 `;

@@ -9,38 +9,32 @@ import styled, { ThemeProvider } from 'styled-components';
 import GlobalStyle from './styles/GlobalStyle';
 import Theme from './styles/Theme';
 import Loading from './components/Loading';
-import Header from './components/Header'; // Import Header
+import Header from './components/Header';
 
 const AdminLogin = React.lazy(() => import('./pages/AdminLogin'));
-const ManagerList = React.lazy(() =>
-  import('../src/components/Admin/ManagerList.js')
-);
+const ManagerList = React.lazy(() => import('./pages/Admin/ManagerList.js'));
 const ManagerDetail = React.lazy(() =>
-  import('../src/components/Member/MemberDetail.js')
+  import('../src/pages/Admin/ManagerDetail.js')
 );
 const BlockManagerList = React.lazy(() =>
-  import('../src/components/Admin/BlockManagerList.js')
+  import('./pages/Admin/BlockManagerList.js')
 );
 const MemberList = React.lazy(() =>
-  import('../src/components/Member/MemberList.js')
+  import('../src/pages/Member/MemberList.js')
 );
 const MemberDetail = React.lazy(() =>
-  import('../src/components/Member/MemberDetail.js')
+  import('../src/pages/Member/MemberDetail.js')
 );
 const BlockMemberList = React.lazy(() =>
-  import('../src/components/Member/BlockMemberList.js')
+  import('../src/pages/Member/BlockMemberList.js')
 );
-const ReviewList = React.lazy(() =>
-  import('../src/components/Member/ReviewList')
-);
+const ReviewList = React.lazy(() => import('../src/pages/Member/ReviewList'));
 const ReviewDetail = React.lazy(() =>
-  import('../src/components/Member/ReviewDetail.js')
+  import('../src/pages/Member/ReviewDetail.js')
 );
-const ProductList = React.lazy(() =>
-  import('../src/components/Service/ProductList.js')
-);
+const ProductList = React.lazy(() => import('./pages/Service/ProductList.js'));
 const ProductDetail = React.lazy(() =>
-  import('../src/components/Service/ProductDetail.js')
+  import('./pages/Service/ProductDetail.js')
 );
 const List = React.lazy(() => import('./pages/List'));
 
