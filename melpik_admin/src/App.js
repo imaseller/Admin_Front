@@ -8,18 +8,19 @@ import AdminLogin from './pages/AdminLogin';
 
 function App() {
   return (
-    <ThemeProvider theme={Theme}>
-      <Router>
+    <Router>
+      <ThemeProvider theme={Theme}>
         <GlobalStyle />
         <div className='App'>
           <header className='App-header'>
             <Routes>
-              <Route path='/' element={<AdminLogin />} />
+              <Route path='/admin/auth/login' element={<AdminLogin />} />
             </Routes>
           </header>
+          ㄴ
         </div>
-      </Router>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Router>
   );
 }
 
