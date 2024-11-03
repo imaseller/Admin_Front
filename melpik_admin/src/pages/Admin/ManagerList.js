@@ -4,6 +4,9 @@ import styled, { ThemeProvider } from 'styled-components';
 import Theme from '../../styles/Theme';
 import { AdminGet } from '../../api/admin/AdminGet';
 import { deleteAdmin } from '../../api/admin/AdminIdDelete';
+import Header from '../../components/AdminMananger/Header';
+import AdminTable from '../../components/AdminMananger/AdminTable';
+import Pagination from '../../components/AdminMananger/Paination';
 
 const ManagerList = () => {
   const navigate = useNavigate();
@@ -63,70 +66,24 @@ const ManagerList = () => {
   return (
     <ThemeProvider theme={Theme}>
       <Content>
-        <Header>
-          <HeaderTitle>관리자 목록</HeaderTitle>
-          <SearchContainer>
-            <SearchSelect onChange={(e) => setSearchType(e.target.value)}>
-              <option value='id'>아이디</option>
-              <option value='name'>이름</option>
-              <option value='email'>이메일</option>
-              <option value='role'>권한등급</option>
-            </SearchSelect>
-            <SearchInput
-              type='text'
-              placeholder='Search'
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </SearchContainer>
-        </Header>
+        <Header
+          title='관리자 목록'
+          searchType={searchType}
+          setSearchType={setSearchType}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
         <Container>
           <TotalCount>총 {totalCount}개</TotalCount>
-          <Table>
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>상태</th>
-                <th>아이디</th>
-                <th>이름</th>
-                <th>이메일</th>
-                <th>권한등급</th>
-                <th>액션</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredData.map((manager, index) => (
-                <tr key={index}>
-                  <td>{manager.no}</td>
-                  <td>{manager.status}</td>
-                  <td>{manager.id}</td>
-                  <td>{manager.name}</td>
-                  <EmailCell onClick={() => handleEdit(manager.id)}>
-                    {manager.email}
-                  </EmailCell>
-                  <td>{manager.role}</td>
-                  <td>
-                    <ActionButton onClick={() => handleEdit(manager.id)}>
-                      수정
-                    </ActionButton>
-                    <ActionButton onClick={() => handleDelete(manager.id)}>
-                      삭제
-                    </ActionButton>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <AdminTable
+            filteredData={filteredData}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+          />
           <ActionButton onClick={() => navigate('/admin/create')}>
             신규 등록
           </ActionButton>
-          <Pagination>
-            <PageButton disabled={page === 1} onClick={() => setPage(page - 1)}>
-              «
-            </PageButton>
-            <PageButton>{page}</PageButton>
-            <PageButton onClick={() => setPage(page + 1)}>»</PageButton>
-          </Pagination>
+          <Pagination page={page} setPage={setPage} />
         </Container>
       </Content>
     </ThemeProvider>
@@ -147,61 +104,11 @@ const Container = styled.div`
   padding: 20px;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: ${({ theme }) => theme.colors.WhiteBrown5};
-`;
-
-const HeaderTitle = styled.h1`
-  ${({ theme }) => theme.fonts.heading};
-  color: ${({ theme }) => theme.colors.black};
-  font-size: ${({ theme }) => theme.fonts.heading.fontSize};
-`;
-
-const SearchInput = styled.input`
-  padding: 10px;
-  font-size: ${({ theme }) => theme.fonts.default.fontSize};
-  border: 1px solid ${({ theme }) => theme.colors.gray};
-  border-radius: 4px;
-  margin-right: 10px;
-  width: 315px;
-`;
-
 const TotalCount = styled.div`
   font-size: ${({ theme }) => theme.fonts.default.fontSize};
   margin-bottom: 10px;
   text-align: left;
   color: ${({ theme }) => theme.colors.black};
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid ${({ theme }) => theme.colors.gray};
-  th,
-  td {
-    padding: 12px 15px;
-    border: 1px solid ${({ theme }) => theme.colors.gray};
-    text-align: center;
-    font-size: ${({ theme }) => theme.fonts.default.fontSize};
-  }
-  th {
-    background-color: ${({ theme }) => theme.colors.WhiteBrown1};
-  }
-`;
-
-const EmailCell = styled.td`
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors.blue};
-  &:hover {
-    color: ${({ theme }) => theme.colors.darkBlue};
-  }
 `;
 
 const ActionButton = styled.button`
@@ -212,32 +119,4 @@ const ActionButton = styled.button`
   color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 4px;
-`;
-
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-`;
-
-const PageButton = styled.button`
-  padding: 5px 10px;
-  cursor: pointer;
-  background-color: ${({ theme }) => theme.colors.WhiteBrown4};
-  color: ${({ theme }) => theme.colors.white};
-  border: none;
-  border-radius: 4px;
-`;
-
-const SearchContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const SearchSelect = styled.select`
-  padding: 10px;
-  font-size: ${({ theme }) => theme.fonts.default.fontSize};
-  border: 1px solid ${({ theme }) => theme.colors.gray};
-  border-radius: 4px;
-  margin-right: 10px;
 `;

@@ -32,11 +32,13 @@ const ReviewList = React.lazy(() => import('../src/pages/Member/ReviewList'));
 const ReviewDetail = React.lazy(() =>
   import('../src/pages/Member/ReviewDetail.js')
 );
-const ProductList = React.lazy(() => import('./pages/Service/ProductList.js'));
-const ProductDetail = React.lazy(() =>
-  import('./pages/Service/ProductDetail.js')
+const ProductList = React.lazy(() =>
+  import('./components/Service/ProductList.js')
 );
-const List = React.lazy(() => import('./pages/List'));
+const ProductDetail = React.lazy(() =>
+  import('./components/Service/ProductDetail.js')
+);
+const List = React.lazy(() => import('./pages/List.js'));
 
 function App() {
   const [isListVisible, setListVisible] = useState(true); // State to control List visibility
