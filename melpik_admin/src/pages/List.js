@@ -78,7 +78,7 @@ const List = ({ children }) => {
             <NavItem>고객센터</NavItem>
           </Navigation>
         </Sidebar>
-        <MainContent>{children || <Outlet />}</MainContent>
+        {/* <MainContent>{children || <Outlet />}</MainContent> */}
       </Container>
     </ThemeProvider>
   );
@@ -88,7 +88,6 @@ export default List;
 
 const Container = styled.div`
   display: flex;
-  height: 100vh;
 `;
 
 const Sidebar = styled.div`

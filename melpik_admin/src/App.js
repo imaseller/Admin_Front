@@ -1,16 +1,16 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
 } from 'react-router-dom';
-import styled from 'styled-components';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import GlobalStyle from './styles/GlobalStyle';
 import Theme from './styles/Theme';
 import Loading from './components/Loading';
 import lazyLoad from './pages/lazyLode.js';
+import Header from './components/Header'; // Import Header
 
 const AdminLogin = React.lazy(() => import('./pages/AdminLogin'));
 import ManagerList from '../src/components/Admin/ManagerList.js';
@@ -27,17 +27,24 @@ import ProductDetail from '../src/components/Service/ProductDetail.js';
 const List = lazyLoad(() => import('./pages/List'));
 
 function App() {
+  const [isListVisible, setListVisible] = useState(true); // State to control List visibility
+
+  const toggleListVisibility = () => {
+    setListVisible((prev) => !prev);
+  };
+
   const renderWithLayout = (Component) => (
     <Suspense fallback={<Loading />}>
-      <List>
-        <Component />
-      </List>
+      {isListVisible && <List />} {/* Render List conditionally */}
+      <Component />
     </Suspense>
   );
+
   return (
     <ThemeProvider theme={Theme}>
       <Router>
         <GlobalStyle />
+        <Header onToggle={toggleListVisibility} /> {/* Include Header */}
         <div className='App'>
           <header className='App-header'>
             <Suspense fallback={<LoadingMessage>로딩 중...</LoadingMessage>}>
