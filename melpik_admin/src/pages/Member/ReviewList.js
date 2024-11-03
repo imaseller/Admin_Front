@@ -1,42 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import Theme from '../../styles/Theme';
-import ReviewTable from '../../components/ReviewTable';
-
-const mockData = [
-  {
-    no: 2039,
-    productName: '투인원 스트라이프 원피스',
-    brand: 'MAJE',
-    rating: 5,
-    usagePeriod: '2024.06.04 - 2024.06.07',
-    size: '66(L)',
-    user: '러블리즈유나',
-    exposure: '노출',
-  },
-];
+import { UserGet } from '../../api/user/UserGet.js';
+import Header from '../../components/HeaderTitle.js';
+import ReviewTable from '../../components/ReviewTable.js';
+import Pagination from '../../components/Paination.js';
 
 const ReviewList = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchType, setSearchType] = useState('id');
+  const [searchType, setSearchType] = useState('email');
+  const [users, setUsers] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await UserGet(page, limit);
+        setUsers(data.users || []);
+        setTotal(data.total || 0);
+      } catch (error) {
+        console.error('Error fetching user list:', error);
+      }
+    };
+
+    fetchData();
+  }, [page, limit]);
 
   const handleEdit = (no) => {
-    navigate(`/admin/reviewlist/detail/${no}`);
+    navigate(`/user/admin${no}`);
   };
 
   const handleRegister = () => {
-    navigate('/admin/reviewlist/detail/new');
+    navigate('/user/adminnew');
   };
 
-  const filteredData = mockData.filter((item) => {
-    if (searchType === 'id' || searchType === 'nickname') {
-      return item.user.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchType === 'title') {
-      return item.productName.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchType === 'brand') {
-      return item.brand.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredData = users.filter((item) => {
+    if (searchType === 'email') {
+      return item.email.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchType === 'nickname') {
+      return item.nickname.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (searchType === 'status') {
+      return item.status.toLowerCase().includes(searchTerm.toLowerCase());
     }
     return item;
   });
@@ -44,36 +52,23 @@ const ReviewList = () => {
   return (
     <ThemeProvider theme={Theme}>
       <Content>
-        <Header>
-          <HeaderTitle>사용후기 목록</HeaderTitle>
-          <SearchContainer>
-            <SearchSelect onChange={(e) => setSearchType(e.target.value)}>
-              <option value='id'>아이디</option>
-              <option value='nickname'>닉네임</option>
-              <option value='title'>제품명</option>
-              <option value='brand'>브랜드</option>
-            </SearchSelect>
-            <SearchInput
-              type='text'
-              placeholder='Search'
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </SearchContainer>
-        </Header>
+        <Header
+          title='회원 목록'
+          searchType={searchType}
+          setSearchType={setSearchType}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
         <Container>
-          <TotalCount>총 {filteredData.length}개</TotalCount>
-          <ReviewTable
-            filteredData={filteredData}
-            handleEdit={handleEdit}
-          />{' '}
-          {/* Use the ReviewTable component */}
+          <TotalCount>총 {total}명</TotalCount>
+          <ReviewTable filteredData={filteredData} handleEdit={handleEdit} />
           <ActionButton onClick={handleRegister}>신규 등록</ActionButton>
-          <Pagination>
-            <PageButton>«</PageButton>
-            <PageButton>1</PageButton>
-            <PageButton>»</PageButton>
-          </Pagination>
+          <Pagination
+            page={page}
+            setPage={setPage}
+            total={total}
+            limit={limit}
+          />
         </Container>
       </Content>
     </ThemeProvider>
@@ -87,96 +82,12 @@ const Content = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   flex: 1;
   font-size: ${({ theme }) => theme.fonts.default.fontSize};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 14px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 16px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: 18px;
-  }
 `;
 
 const Container = styled.div`
-  padding: 10px;
   border: 2px solid ${({ theme }) => theme.colors.gray};
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: ${({ theme }) => theme.colors.WhiteBrown5};
-`;
-
-const HeaderTitle = styled.h1`
-  ${({ theme }) => theme.fonts.heading};
-  color: ${({ theme }) => theme.colors.black};
-  font-size: ${({ theme }) => theme.fonts.heading.fontSize};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 22px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 26px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: 28px;
-  }
-`;
-
-const SearchContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const SearchSelect = styled.select`
-  padding: 10px;
-  font-size: ${({ theme }) => theme.fonts.default.fontSize};
-  border: 1px solid ${({ theme }) => theme.colors.gray};
-  border-radius: 4px;
-  margin-right: 10px;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 12px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 14px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: 16px;
-  }
-`;
-
-const SearchInput = styled.input`
-  padding: 10px;
-  font-size: ${({ theme }) => theme.fonts.default.fontSize};
-  border: 1px solid ${({ theme }) => theme.colors.gray};
-  border-radius: 4px;
-  margin-right: 10px;
-  width: 315px;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 12px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 14px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: 16px;
-  }
+  padding: 20px;
+  overflow-x: auto; /* Enable horizontal scrolling if necessary */
 `;
 
 const TotalCount = styled.div`
@@ -184,18 +95,6 @@ const TotalCount = styled.div`
   margin-bottom: 10px;
   text-align: left;
   color: ${({ theme }) => theme.colors.black};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 14px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 16px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: 18px;
-  }
 `;
 
 const ActionButton = styled.button`
@@ -206,61 +105,4 @@ const ActionButton = styled.button`
   color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 4px;
-  font-size: ${({ theme }) => theme.fonts.SmallButton.fontSize};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.WhiteBrown5};
-  }
-
-  &:active {
-    background-color: ${({ theme }) => theme.colors.WhiteBrown6};
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 12px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 14px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: 16px;
-  }
-`;
-
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-`;
-
-const PageButton = styled.button`
-  padding: 5px 10px;
-  cursor: pointer;
-  background-color: ${({ theme }) => theme.colors.WhiteBrown4};
-  color: ${({ theme }) => theme.colors.white};
-  border: none;
-  border-radius: 4px;
-  font-size: ${({ theme }) => theme.fonts.SmallButton.fontSize};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.WhiteBrown5};
-  }
-
-  &:active {
-    background-color: ${({ theme }) => theme.colors.WhiteBrown6};
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 12px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 14px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: 16px;
-  }
 `;
