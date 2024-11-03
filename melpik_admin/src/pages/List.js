@@ -3,7 +3,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import Theme from '../styles/Theme';
 
-const List = ({ children }) => {
+const List = () => {
   const navigate = useNavigate();
   const [isManagerMenuOpen, setIsManagerMenuOpen] = useState(false);
   const [isMemberMenuOpen, setIsMemberMenuOpen] = useState(false);
@@ -78,7 +78,9 @@ const List = ({ children }) => {
             <NavItem>고객센터</NavItem>
           </Navigation>
         </Sidebar>
-        {/* <MainContent>{children || <Outlet />}</MainContent> */}
+        {/* <MainContent>
+          <Outlet />
+        </MainContent> */}
       </Container>
     </ThemeProvider>
   );
@@ -158,6 +160,7 @@ const SubMenuItem = styled.div`
 
 const MainContent = styled.div`
   flex: 1;
+  width: 100px;
   display: flex;
   flex-direction: column;
   padding: 20px;
