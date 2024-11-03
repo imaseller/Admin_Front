@@ -52,7 +52,7 @@ const Table = styled.table`
 
   th,
   td {
-    padding: 12px 5px;
+    padding: 12px 0px;
     text-align: left;
     min-width: 60px;
     border-bottom: 1px solid #ddd;
