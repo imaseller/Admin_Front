@@ -37,6 +37,7 @@ const ProductDetail = React.lazy(() =>
   import('./pages/Service/ProductDetail.js')
 );
 const BrandList = React.lazy(() => import('./pages/Service/BrandList.js'));
+const OrderList = React.lazy(() => import('./pages/Payment/OrderList.js'));
 const List = React.lazy(() => import('./components/List.js'));
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
                   element={<ProductDetail />}
                 />
                 <Route path='/brandlist' element={<BrandList />} />
+                <Route path='/Orderlist' element={<OrderList />} />
               </Routes>
             </MainContent>
           </Suspense>

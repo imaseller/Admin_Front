@@ -8,6 +8,7 @@ const List = () => {
   const [isManagerMenuOpen, setIsManagerMenuOpen] = useState(false);
   const [isMemberMenuOpen, setIsMemberMenuOpen] = useState(false);
   const [isServiceMenuOpen, setIsServiceMenuOpen] = useState(false);
+  const [isPaymentMenuOpen, setIsPaymentMenuOpen] = useState(false);
 
   const handleManagerMenuToggle = () => {
     setIsManagerMenuOpen(!isManagerMenuOpen);
@@ -19,6 +20,10 @@ const List = () => {
 
   const handleServiceMenuToggle = () => {
     setIsServiceMenuOpen(!isServiceMenuOpen);
+  };
+
+  const handlePaymentMenuToggle = () => {
+    setIsPaymentMenuOpen(!isPaymentMenuOpen);
   };
 
   return (
@@ -66,7 +71,12 @@ const List = () => {
                 예정제품 관리
               </SubMenuItem>
             </SubMenu>
-            <NavItem>결제 관리</NavItem>
+            <NavItem onClick={handlePaymentMenuToggle}>결제 관리</NavItem>
+            <SubMenu isOpen={isPaymentMenuOpen}>
+              <SubMenuItem onClick={() => navigate('/Orderlist')}>
+                주문 목록
+              </SubMenuItem>
+            </SubMenu>
             <NavItem>앱 설정 관리</NavItem>
             <NavItem>고객센터</NavItem>
           </Navigation>
