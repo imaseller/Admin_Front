@@ -1,10 +1,5 @@
 import React, { Suspense, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import Theme from "./styles/Theme";
@@ -42,52 +37,49 @@ const List = React.lazy(() => import("./components/List.js"));
 
 function App() {
   const [isListVisible, setListVisible] = useState(true); // State to control List visibility
+  const location = useLocation(); // Get current location
 
   const toggleListVisibility = () => {
     setListVisible((prev) => !prev); // Toggle the visibility
   };
 
+  const isLoginPage = location.pathname === "/admin/auth/login"; // Check if on login page
+
   return (
     <ThemeProvider theme={Theme}>
-      <Router>
-        <GlobalStyle />
-        <Header onToggle={toggleListVisibility} /> {/* Pass toggle function */}
-        <AppContainer>
-          <Suspense fallback={<Loading />}>
-            {isListVisible && <List />} {/* Render List conditionally */}
-            <MainContent>
-              <Routes>
-                <Route
-                  path="/"
-                  element={<Navigate to="/admin/auth/login" replace />}
-                />
-                <Route path="/admin/auth/login" element={<AdminLogin />} />
-                <Route path="/admin" element={<ManagerList />} />
-                <Route path="/admin/:id" element={<ManagerDetail />} />
-                <Route
-                  path="/blockmanagerlist"
-                  element={<BlockManagerList />}
-                />
-                <Route path="/user" element={<MemberList />} />
-                <Route path="/user/detail/:seq" element={<MemberDetail />} />
-                <Route path="/user/blocked" element={<BlockMemberList />} />
-                <Route path="/reviewlist" element={<ReviewList />} />
-                <Route
-                  path="/reviewlist/detail/:no"
-                  element={<ReviewDetail />}
-                />
-                <Route path="/productlist" element={<ProductList />} />
-                <Route
-                  path="/productlist/detail/:id"
-                  element={<ProductDetail />}
-                />
-                <Route path="/brandlist" element={<BrandList />} />
-                <Route path="/Orderlist" element={<OrderList />} />
-              </Routes>
-            </MainContent>
-          </Suspense>
-        </AppContainer>
-      </Router>
+      <GlobalStyle />
+      {isLoginPage ? null : <Header onToggle={toggleListVisibility} />}{" "}
+      {/* Conditionally render Header */}
+      <AppContainer>
+        <Suspense fallback={<Loading />}>
+          {!isLoginPage && isListVisible && <List />}{" "}
+          {/* Conditionally render List */}
+          <MainContent>
+            <Routes>
+              <Route
+                path="/"
+                element={<Navigate to="/admin/auth/login" replace />}
+              />
+              <Route path="/admin/auth/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<ManagerList />} />
+              <Route path="/admin/:id" element={<ManagerDetail />} />
+              <Route path="/blockmanagerlist" element={<BlockManagerList />} />
+              <Route path="/user" element={<MemberList />} />
+              <Route path="/user/detail/:seq" element={<MemberDetail />} />
+              <Route path="/user/blocked" element={<BlockMemberList />} />
+              <Route path="/reviewlist" element={<ReviewList />} />
+              <Route path="/reviewlist/detail/:no" element={<ReviewDetail />} />
+              <Route path="/productlist" element={<ProductList />} />
+              <Route
+                path="/productlist/detail/:id"
+                element={<ProductDetail />}
+              />
+              <Route path="/brandlist" element={<BrandList />} />
+              <Route path="/Orderlist" element={<OrderList />} />
+            </Routes>
+          </MainContent>
+        </Suspense>
+      </AppContainer>
     </ThemeProvider>
   );
 }
@@ -100,7 +92,7 @@ const AppContainer = styled.div`
 const MainContent = styled.div`
   flex: 1;
   padding: 20px;
-  background-color: ${({ theme }) => theme.colors.WhiteBrown1};
+
   overflow-y: auto; /* Allows scrolling if content exceeds viewport */
 `;
 
