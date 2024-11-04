@@ -26,9 +26,8 @@ const List = () => {
       <Container>
         <Sidebar>
           <Profile>
-            <Avatar src='/path/to/avatar.png' alt='Profile Avatar' />
             <ProfileInfo>
-              <Username>관리자 (sight78)</Username>
+              <Username>관리자 (Admin)</Username>
               <Status>Online</Status>
             </ProfileInfo>
           </Profile>
@@ -98,13 +97,6 @@ const Profile = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-`;
-
-const Avatar = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
 `;
 
 const ProfileInfo = styled.div`

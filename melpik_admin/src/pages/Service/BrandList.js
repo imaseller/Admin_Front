@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { UserGet } from '../../api/user/UserGet.js';
-import Theme from '../../styles/Theme';
-import Header from '../../components/HeaderTitle';
+import Theme from '../../styles/Theme.js';
+import Header from '../../components/HeaderTitle.js';
 import Pagination from '../../components/Paination.js';
-import ProductTable from '../../components/ProductTable';
+import BrandTable from '../../components/BrandTable.js';
 
-const ProductList = () => {
+const BrandList = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchType, setSearchType] = useState('email');
@@ -57,7 +57,7 @@ const ProductList = () => {
     <ThemeProvider theme={Theme}>
       <Content>
         <Header
-          title='제품 관리'
+          title='브랜드 관리'
           searchType={searchType}
           setSearchType={setSearchType}
           searchTerm={searchTerm}
@@ -65,7 +65,7 @@ const ProductList = () => {
         />
         <Container>
           <TotalCount>총 {filteredData.length}개</TotalCount>
-          <ProductTable
+          <BrandTable
             products={filteredData}
             onProductClick={handleProductClick}
           />
@@ -82,7 +82,7 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default BrandList;
 
 const Content = styled.div`
   padding: 10px;

@@ -53,7 +53,7 @@ const ReviewList = () => {
     <ThemeProvider theme={Theme}>
       <Content>
         <Header
-          title='회원 목록'
+          title='사용후기 목록'
           searchType={searchType}
           setSearchType={setSearchType}
           searchTerm={searchTerm}
