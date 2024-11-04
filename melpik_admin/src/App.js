@@ -36,7 +36,7 @@ const ProductList = React.lazy(() => import('./pages/Service/ProductList.js'));
 const ProductDetail = React.lazy(() =>
   import('./pages/Service/ProductDetail.js')
 );
-const List = React.lazy(() => import('./pages/List.js'));
+const List = React.lazy(() => import('./components/List.js'));
 
 function App() {
   const [isListVisible, setListVisible] = useState(true); // State to control List visibility

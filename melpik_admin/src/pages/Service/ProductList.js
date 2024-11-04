@@ -93,6 +93,8 @@ const Content = styled.div`
 const Container = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.gray};
   padding: 20px;
+  height: 100%;
+  min-height: 1000px;
 `;
 
 const TotalCount = styled.div`
