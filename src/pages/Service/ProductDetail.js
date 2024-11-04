@@ -1,73 +1,73 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
-import Theme from '../../styles/Theme';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import Theme from "../../styles/Theme";
 
 const mockProductData = [
   {
     id: 806,
-    productName: '니트 배색 벨티드 집업 원피스',
-    brand: 'ZOOC',
-    category: '원피스',
-    color: 'Cream',
-    size: '44(S)-0 / 55(M)-1 / 66(L)-1 / Free-0',
-    priceRetail: '384,300',
-    rentPrice3: '40,000',
-    rentPrice5: '55,000',
-    material: '겉감: 면 53% 나일론 41% 폴리우레탄 6% 안감:폴리에스터100%',
-    thickness: '적당',
-    elasticity: '약간있음',
-    lining: '안감없음',
-    texture: '적당',
-    transparency: '비침없음',
+    productName: "니트 배색 벨티드 집업 원피스",
+    brand: "ZOOC",
+    category: "원피스",
+    color: "Cream",
+    size: "44(S)-0 / 55(M)-1 / 66(L)-1 / Free-0",
+    priceRetail: "384,300",
+    rentPrice3: "40,000",
+    rentPrice5: "55,000",
+    material: "겉감: 면 53% 나일론 41% 폴리우레탄 6% 안감:폴리에스터100%",
+    thickness: "적당",
+    elasticity: "약간있음",
+    lining: "안감없음",
+    texture: "적당",
+    transparency: "비침없음",
     realSize: {
-      '44(S)': { A: 0, B: 0, C: 0, D: 0, E: 0 },
-      '55(M)': { A: 37, B: 90, C: 66, D: 60, E: 113 },
-      '66(L)': { A: 39, B: 94, C: 70, D: 62, E: 115 },
+      "44(S)": { A: 0, B: 0, C: 0, D: 0, E: 0 },
+      "55(M)": { A: 37, B: 90, C: 66, D: 60, E: 113 },
+      "66(L)": { A: 39, B: 94, C: 70, D: 62, E: 115 },
     },
     quantity: {
-      '44(S)': 0,
-      '55(M)': 1,
-      '66(L)': 1,
+      "44(S)": 0,
+      "55(M)": 1,
+      "66(L)": 1,
       Free: 0,
     },
     review: {
-      video: '',
-      image: '',
+      video: "",
+      image: "",
     },
-    thumbnail: '/image.do?dir=item&img=20230411175710_2669.jpg',
-    productNumber: 'Z231MSE013',
-    description: '가슴부터 허리까지 밴딩소재로 되어있는 캐주얼한 제품입니다.',
-    useSeason: ['봄', '가을', '겨울'],
-    status: '시즌상품',
-    useYn: 'N',
-    registerDate: '2023.04.11',
+    thumbnail: "/image.do?dir=item&img=20230411175710_2669.jpg",
+    productNumber: "Z231MSE013",
+    description: "가슴부터 허리까지 밴딩소재로 되어있는 캐주얼한 제품입니다.",
+    useSeason: ["봄", "가을", "겨울"],
+    status: "시즌상품",
+    useYn: "N",
+    registerDate: "2023.04.11",
   },
 ];
 
 const brands = [
-  { value: '58', label: 'S_Blanc' },
-  { value: '57', label: 'CC Collect' },
-  { value: '56', label: 'Tuo' },
+  { value: "58", label: "S_Blanc" },
+  { value: "57", label: "CC Collect" },
+  { value: "56", label: "Tuo" },
 ];
 
 const categories = [
-  { value: 'C01', label: '의류' },
-  { value: 'C02', label: '웨딩' },
-  { value: 'C03', label: '주얼리' },
-  { value: 'C04', label: '가방' },
+  { value: "C01", label: "의류" },
+  { value: "C02", label: "웨딩" },
+  { value: "C03", label: "주얼리" },
+  { value: "C04", label: "가방" },
 ];
 
 const subCategories = [
-  { value: '300', label: '원피스' },
-  { value: '303', label: '투피스' },
-  { value: '304', label: '상의' },
-  { value: '305', label: '하의' },
-  { value: '301', label: '정장' },
-  { value: '302', label: '아우터' },
+  { value: "300", label: "원피스" },
+  { value: "303", label: "투피스" },
+  { value: "304", label: "상의" },
+  { value: "305", label: "하의" },
+  { value: "301", label: "정장" },
+  { value: "302", label: "아우터" },
 ];
 
-const seasons = ['봄', '여름', '가을', '겨울'];
+const seasons = ["봄", "여름", "가을", "겨울"];
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -88,7 +88,7 @@ const ProductDetail = () => {
   const handleCheckboxChange = (name, value) => {
     setProduct((prevProduct) => ({
       ...prevProduct,
-      [name]: prevProduct[name] === value ? '' : value,
+      [name]: prevProduct[name] === value ? "" : value,
     }));
   };
 
@@ -124,6 +124,13 @@ const ProductDetail = () => {
     }));
   };
 
+  const handleSubCategoryChange = (value) => {
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      subCategory: prevProduct.subCategory === value ? "" : value,
+    }));
+  };
+
   if (!product) {
     return <div>제품을 찾을 수 없습니다.</div>;
   }
@@ -138,8 +145,8 @@ const ProductDetail = () => {
               <FormGroup>
                 <Label>제품명:</Label>
                 <Input
-                  type='text'
-                  name='productName'
+                  type="text"
+                  name="productName"
                   value={product.productName}
                   onChange={handleChange}
                 />
@@ -147,7 +154,7 @@ const ProductDetail = () => {
               <FormGroup>
                 <Label>브랜드:</Label>
                 <Select
-                  name='brand'
+                  name="brand"
                   value={product.brand}
                   onChange={handleChange}
                 >
@@ -161,7 +168,7 @@ const ProductDetail = () => {
               <FormGroup>
                 <Label>분류:</Label>
                 <Select
-                  name='category'
+                  name="category"
                   value={product.category}
                   onChange={handleChange}
                 >
@@ -175,10 +182,12 @@ const ProductDetail = () => {
                   {subCategories.map((subCategory) => (
                     <CheckLabel key={subCategory.value}>
                       <input
-                        type='checkbox'
+                        type="checkbox"
                         value={subCategory.value}
                         checked={product.category === subCategory.value}
-                        onChange={() => handleChange(subCategory.value)}
+                        onChange={() =>
+                          handleSubCategoryChange(subCategory.value)
+                        }
                       />
                       {subCategory.label}
                     </CheckLabel>
@@ -191,7 +200,7 @@ const ProductDetail = () => {
                   {seasons.map((season) => (
                     <CheckLabel key={season}>
                       <input
-                        type='checkbox'
+                        type="checkbox"
                         value={season}
                         checked={
                           product.useSeason &&
@@ -207,8 +216,8 @@ const ProductDetail = () => {
               <FormGroup>
                 <Label>색상:</Label>
                 <Input
-                  type='text'
-                  name='color'
+                  type="text"
+                  name="color"
                   value={product.color}
                   onChange={handleChange}
                 />
@@ -216,31 +225,31 @@ const ProductDetail = () => {
               <FormGroup>
                 <Label>가격:</Label>
                 <Input
-                  type='text'
-                  name='priceRetail'
+                  type="text"
+                  name="priceRetail"
                   value={product.priceRetail}
                   onChange={handleChange}
-                  placeholder='리테일 가격'
+                  placeholder="리테일 가격"
                 />
                 <Input
-                  type='text'
-                  name='rentPrice3'
+                  type="text"
+                  name="rentPrice3"
                   value={product.rentPrice3}
                   onChange={handleChange}
-                  placeholder='3회 대여 가격'
+                  placeholder="3회 대여 가격"
                 />
                 <Input
-                  type='text'
-                  name='rentPrice5'
+                  type="text"
+                  name="rentPrice5"
                   value={product.rentPrice5}
                   onChange={handleChange}
-                  placeholder='5회 대여 가격'
+                  placeholder="5회 대여 가격"
                 />
               </FormGroup>
               <FormGroup>
                 <Label>제품소재:</Label>
                 <TextArea
-                  name='material'
+                  name="material"
                   value={product.material}
                   onChange={handleChange}
                 />
@@ -258,7 +267,7 @@ const ProductDetail = () => {
                           <React.Fragment key={key}>
                             <LabelSmall>{key}</LabelSmall>
                             <InputSmall
-                              type='number'
+                              type="number"
                               value={value}
                               onChange={(e) =>
                                 handleSizeChange(size, key, e.target.value)
@@ -278,7 +287,7 @@ const ProductDetail = () => {
                     <SizeQuantityRow key={size}>
                       <span>{size}</span>
                       <InputSmall
-                        type='number'
+                        type="number"
                         value={qty}
                         onChange={(e) =>
                           handleQuantityChange(size, e.target.value)
@@ -290,16 +299,16 @@ const ProductDetail = () => {
               </FormGroup>
               <FormGroup>
                 <Label>제품리뷰:</Label>
-                <FileInput type='file' />
+                <FileInput type="file" />
                 <ImagePreview>
-                  <img src={product.review.image} alt='제품 리뷰 이미지' />
+                  <img src={product.review.image} alt="제품 리뷰 이미지" />
                 </ImagePreview>
               </FormGroup>
               <FormGroup>
                 <Label>제품이미지:</Label>
-                <FileInput type='file' />
+                <FileInput type="file" />
                 <ImagePreview>
-                  <img src={product.thumbnail} alt='제품 이미지' />
+                  <img src={product.thumbnail} alt="제품 이미지" />
                 </ImagePreview>
               </FormGroup>
               <FormGroup>
@@ -307,17 +316,17 @@ const ProductDetail = () => {
                 <CheckboxGroup>
                   <CheckLabel>
                     <input
-                      type='checkbox'
-                      checked={product.useYn === 'Y'}
-                      onChange={() => handleCheckboxChange('useYn', 'Y')}
+                      type="checkbox"
+                      checked={product.useYn === "Y"}
+                      onChange={() => handleCheckboxChange("useYn", "Y")}
                     />
                     노출
                   </CheckLabel>
                   <CheckLabel>
                     <input
-                      type='checkbox'
-                      checked={product.useYn === 'N'}
-                      onChange={() => handleCheckboxChange('useYn', 'N')}
+                      type="checkbox"
+                      checked={product.useYn === "N"}
+                      onChange={() => handleCheckboxChange("useYn", "N")}
                     />
                     비노출
                   </CheckLabel>
@@ -326,7 +335,7 @@ const ProductDetail = () => {
               <FormGroup>
                 <Label>설명:</Label>
                 <TextArea
-                  name='description'
+                  name="description"
                   value={product.description}
                   onChange={handleChange}
                 />
@@ -334,8 +343,8 @@ const ProductDetail = () => {
               <FormGroup>
                 <Label>상태:</Label>
                 <Input
-                  type='text'
-                  name='status'
+                  type="text"
+                  name="status"
                   value={product.status}
                   onChange={handleChange}
                 />
@@ -343,8 +352,8 @@ const ProductDetail = () => {
               <FormGroup>
                 <Label>등록일:</Label>
                 <Input
-                  type='text'
-                  name='registerDate'
+                  type="text"
+                  name="registerDate"
                   value={product.registerDate}
                   readOnly
                 />
@@ -376,7 +385,6 @@ const ScrollContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.gray};
   padding: 20px;
   background-color: ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.WhiteBrown1};
 `;
 
 const FlexContainer = styled.div`
@@ -401,7 +409,6 @@ const FormGroup = styled.div`
   align-items: center;
   flex-wrap: wrap;
   width: 820px;
-  margin: 10px;
 `;
 
 const Label = styled.label`
@@ -456,35 +463,10 @@ const CheckboxGroup = styled.div`
   }
 `;
 
-const CheckboxGrouprow = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-`;
-
 const CheckLabel = styled.label`
   display: flex;
   align-items: center;
   width: 120px;
-`;
-
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const DetailContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  border: 1px solid ${({ theme }) => theme.colors.gray};
-`;
-
-const DetailGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  margin-left: 20px;
 `;
 
 const SizeGroup = styled.div`
@@ -511,12 +493,6 @@ const SizeQuantityRow = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-`;
-
-const SizeDescription = styled.div`
-  font-size: 12px;
-  color: gray;
-  margin-top: 10px;
 `;
 
 const FileInput = styled.input`
