@@ -1,44 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
-import Theme from '../../styles/Theme';
-import { getAdminById } from '../../api/admin/AdminIdGet';
-import { createAdmin } from '../../api/admin/AdminPost.js';
-import { updateAdmin } from '../../api/admin/AdminIdPut.js';
-import { deleteAdmin } from '../../api/admin/AdminIdDelete.js';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import Theme from "../../styles/Theme";
+import { getAdminById } from "../../api/admin/AdminIdGet";
+import { createAdmin } from "../../api/admin/AdminPost.js";
+import { updateAdmin } from "../../api/admin/AdminIdPut.js";
+import { deleteAdmin } from "../../api/admin/AdminIdDelete.js";
 
 const ManagerDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [manager, setManager] = useState({
-    아이디: '',
-    비밀번호: '',
-    비밀번호확인: '',
-    이메일: '',
-    이름: '',
-    권한등급: 'admin',
-    상태: 'active',
+    아이디: "",
+    비밀번호: "",
+    비밀번호확인: "",
+    이메일: "",
+    이름: "",
+    권한등급: "admin",
+    상태: "active",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    if (id !== 'create') {
+    if (id !== "create") {
       const fetchManager = async () => {
         try {
           const data = await getAdminById(id);
           if (data.statusCode === 404) {
-            setError('관리자를 찾을 수 없습니다.');
+            setError("관리자를 찾을 수 없습니다.");
           } else {
             setManager({
               아이디: data.id,
               이메일: data.email,
-              이름: data.name || '',
+              이름: data.name || "",
               권한등급: data.role,
-              상태: data.status === 'active' ? '정상' : '블럭',
+              상태: data.status === "active" ? "정상" : "블럭",
             });
           }
         } catch (error) {
-          setError('관리자 정보를 가져오는 중 오류가 발생했습니다.');
+          setError("관리자 정보를 가져오는 중 오류가 발생했습니다.");
         }
       };
 
@@ -48,42 +48,42 @@ const ManagerDetail = () => {
 
   const handleSave = async () => {
     if (manager.비밀번호 !== manager.비밀번호확인) {
-      setError('비밀번호가 일치하지 않습니다.');
+      setError("비밀번호가 일치하지 않습니다.");
       return;
     }
 
     try {
-      if (id === 'create') {
-        const createdAdmin = await createAdmin({
+      if (id === "create") {
+        await createAdmin({
           id: manager.아이디,
           password: manager.비밀번호,
           email: manager.이메일,
           name: manager.이름,
           role: manager.권한등급,
-          status: manager.상태 === '정상' ? 'active' : 'blocked',
+          status: manager.상태 === "정상" ? "active" : "blocked",
         });
-        navigate('/admin');
+        navigate("/admin");
       } else {
         await updateAdmin(id, {
           email: manager.이메일,
           role: manager.권한등급,
-          status: manager.상태 === '정상' ? 'active' : 'blocked',
+          status: manager.상태 === "정상" ? "active" : "blocked",
         });
-        alert('관리자가 성공적으로 수정되었습니다.');
+        alert("관리자가 성공적으로 수정되었습니다.");
         navigate(`/admin/${id}`);
       }
     } catch (error) {
-      setError('어드민을 저장하는 중 오류가 발생했습니다.');
+      setError("어드민을 저장하는 중 오류가 발생했습니다.");
     }
   };
 
   const handleDelete = async () => {
     try {
       await deleteAdmin(manager.아이디);
-      alert('관리자가 성공적으로 삭제되었습니다.');
-      navigate('/admin');
+      alert("관리자가 성공적으로 삭제되었습니다.");
+      navigate("/admin");
     } catch (error) {
-      setError('어드민을 삭제하는 중 오류가 발생했습니다.');
+      setError("어드민을 삭제하는 중 오류가 발생했습니다.");
     }
   };
 
@@ -93,7 +93,7 @@ const ManagerDetail = () => {
   };
 
   const handleList = () => {
-    navigate('/admin');
+    navigate("/admin");
   };
 
   if (error) {
@@ -103,24 +103,24 @@ const ManagerDetail = () => {
   return (
     <ThemeProvider theme={Theme}>
       <Container>
-        <Title>{id === 'create' ? '관리자 등록' : '관리자 수정'}</Title>
+        <Title>{id === "create" ? "관리자 등록" : "관리자 수정"}</Title>
         <FormContainer>
           <LeftForm>
             <FormRow>
               <Label>아이디:</Label>
               <Input
-                type='text'
-                name='아이디'
+                type="text"
+                name="아이디"
                 value={manager.아이디}
                 onChange={handleChange}
-                disabled={id !== 'create'}
+                disabled={id !== "create"}
               />
             </FormRow>
             <FormRow>
               <Label>이름:</Label>
               <Input
-                type='text'
-                name='이름'
+                type="text"
+                name="이름"
                 value={manager.이름}
                 onChange={handleChange}
               />
@@ -128,28 +128,28 @@ const ManagerDetail = () => {
             <FormRow>
               <Label>비밀번호:</Label>
               <Input
-                type='password'
-                name='비밀번호'
+                type="password"
+                name="비밀번호"
                 value={manager.비밀번호}
                 onChange={handleChange}
-                disabled={id !== 'create'}
+                disabled={id !== "create"}
               />
             </FormRow>
             <FormRow>
               <Label>비밀번호 확인:</Label>
               <Input
-                type='password'
-                name='비밀번호확인'
+                type="password"
+                name="비밀번호확인"
                 value={manager.비밀번호확인}
                 onChange={handleChange}
-                disabled={id !== 'create'}
+                disabled={id !== "create"}
               />
             </FormRow>
             <FormRow>
               <Label>이메일:</Label>
               <Input
-                type='email'
-                name='이메일'
+                type="email"
+                name="이메일"
                 value={manager.이메일}
                 onChange={handleChange}
               />
@@ -159,12 +159,12 @@ const ManagerDetail = () => {
             <FormRow>
               <Label>권한등급:</Label>
               <Select
-                name='권한등급'
+                name="권한등급"
                 value={manager.권한등급}
                 onChange={handleChange}
               >
-                <option value='admin'>시스템 관리자</option>
-                <option value='service_admin'>서비스 관리자</option>
+                <option value="admin">시스템 관리자</option>
+                <option value="service_admin">서비스 관리자</option>
               </Select>
             </FormRow>
             <FormRow>
@@ -172,20 +172,20 @@ const ManagerDetail = () => {
               <RadioGroup>
                 <RadioLabel>
                   <Radio
-                    type='radio'
-                    name='상태'
-                    value='정상'
-                    checked={manager.상태 === '정상'}
+                    type="radio"
+                    name="상태"
+                    value="정상"
+                    checked={manager.상태 === "정상"}
                     onChange={handleChange}
                   />
                   정상
                 </RadioLabel>
                 <RadioLabel>
                   <Radio
-                    type='radio'
-                    name='상태'
-                    value='블럭'
-                    checked={manager.상태 === '블럭'}
+                    type="radio"
+                    name="상태"
+                    value="블럭"
+                    checked={manager.상태 === "블럭"}
                     onChange={handleChange}
                   />
                   블럭
@@ -198,9 +198,9 @@ const ManagerDetail = () => {
           <LeftActionButton onClick={handleList}>목록보기</LeftActionButton>
           <RightActionButtons>
             <ActionButton onClick={handleSave}>
-              {id === 'create' ? '저장하기' : '수정하기'}
+              {id === "create" ? "저장하기" : "수정하기"}
             </ActionButton>
-            {id !== 'create' && (
+            {id !== "create" && (
               <ActionButton onClick={handleDelete}>삭제하기</ActionButton>
             )}
             <ActionButton onClick={handleList}>저장취소</ActionButton>

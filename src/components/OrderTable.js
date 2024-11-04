@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const OrderTable = ({ filteredData, handleEdit }) => {
   return (
@@ -22,15 +22,15 @@ const OrderTable = ({ filteredData, handleEdit }) => {
         {filteredData.map((order) => (
           <tr key={order.no}>
             <td>{order.no}</td>
-            <td>{new Date(order.applicationDate).toLocaleDateString()}</td>{' '}
+            <td>{new Date(order.applicationDate).toLocaleDateString()}</td>{" "}
             {/* 신청일 */}
             <td>{order.recipientNickname}</td> {/* 닉네임(수령인) */}
             <td>
               {order.productName} / {order.brandName}
-            </td>{' '}
+            </td>{" "}
             {/* 제품명/브랜드 */}
             <td>{order.duration}</td> {/* 기간 */}
-            <td>{new Date(order.useDate).toLocaleDateString()}</td>{' '}
+            <td>{new Date(order.useDate).toLocaleDateString()}</td>{" "}
             {/* 이용날짜 */}
             <td>{order.size}</td> {/* 사이즈 */}
             <td>{order.amount}</td> {/* 이용금액 */}
@@ -65,14 +65,5 @@ const Table = styled.table`
 
   th {
     background-color: ${({ theme }) => theme.colors.WhiteBrown1};
-  }
-`;
-
-const EmailCell = styled.td`
-  color: #007bff;
-  cursor: pointer;
-
-  &:hover {
-    color: #0056b3;
   }
 `;

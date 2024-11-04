@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
-import { UserGet } from '../../api/user/UserGet.js';
-import Theme from '../../styles/Theme.js';
-import Header from '../../components/HeaderTitle.js';
-import Pagination from '../../components/Paination.js';
-import BrandTable from '../../components/BrandTable.js';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import { UserGet } from "../../api/user/UserGet.js";
+import Theme from "../../styles/Theme.js";
+import Header from "../../components/HeaderTitle.js";
+import Pagination from "../../components/Paination.js";
+import BrandTable from "../../components/BrandTable.js";
 
 const BrandList = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchType, setSearchType] = useState('email');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchType, setSearchType] = useState("email");
   const [users, setUsers] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -23,27 +23,27 @@ const BrandList = () => {
         setUsers(data.users || []);
         setTotal(data.total || 0);
       } catch (error) {
-        console.error('Error fetching user list:', error);
+        console.error("Error fetching user list:", error);
       }
     };
 
     fetchData();
   }, [page, limit]);
 
-  const handleEdit = (no) => {
-    navigate(`/user/admin${no}`);
-  };
+  // const handleEdit = (no) => {
+  //   navigate(`/user/admin${no}`);
+  // };
 
   const handleRegister = () => {
-    navigate('/user/adminnew');
+    navigate("/user/adminnew");
   };
 
   const filteredData = users.filter((item) => {
-    if (searchType === 'email') {
+    if (searchType === "email") {
       return item.email.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchType === 'nickname') {
+    } else if (searchType === "nickname") {
       return item.nickname.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchType === 'status') {
+    } else if (searchType === "status") {
       return item.status.toLowerCase().includes(searchTerm.toLowerCase());
     }
     return true;
@@ -57,7 +57,7 @@ const BrandList = () => {
     <ThemeProvider theme={Theme}>
       <Content>
         <Header
-          title='브랜드 관리'
+          title="브랜드 관리"
           searchType={searchType}
           setSearchType={setSearchType}
           searchTerm={searchTerm}

@@ -51,27 +51,17 @@ function App() {
     <ThemeProvider theme={Theme}>
       <Router>
         <GlobalStyle />
-        {/* Only render Header when not on the login page */}
-        <Routes>
-          <Route path="/admin/auth/login" element={<AdminLogin />} />
-          {/* Other routes here */}
-        </Routes>
-        {/* Render Header and List conditionally */}
-        {window.location.pathname !== "/admin/auth/login" && (
-          <>
-            <Header onToggle={toggleListVisibility} />{" "}
-            {/* Pass toggle function */}
-            {isListVisible && <List />} {/* Render List conditionally */}
-          </>
-        )}
+        <Header onToggle={toggleListVisibility} /> {/* Pass toggle function */}
         <AppContainer>
           <Suspense fallback={<Loading />}>
+            {isListVisible && <List />} {/* Render List conditionally */}
             <MainContent>
               <Routes>
                 <Route
                   path="/"
                   element={<Navigate to="/admin/auth/login" replace />}
                 />
+                <Route path="/admin/auth/login" element={<AdminLogin />} />
                 <Route path="/admin" element={<ManagerList />} />
                 <Route path="/admin/:id" element={<ManagerDetail />} />
                 <Route

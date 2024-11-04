@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
-import Theme from '../../styles/Theme';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import Theme from "../../styles/Theme";
 
 const ReviewDetail = () => {
   const navigate = useNavigate();
-  const { no } = useParams();
+  // const { no } = useParams();
 
   const [review, setReview] = useState({
-    productName: '투인원 스트라이프 원피스',
-    brand: 'MAJE',
+    productName: "투인원 스트라이프 원피스",
+    brand: "MAJE",
     rating: 5,
-    usagePeriod: '2024.06.04 - 2024.06.07',
-    size: '66(L)',
-    color: 'Blue',
-    content: '잘 입었어요.',
-    exposure: '공개',
+    usagePeriod: "2024.06.04 - 2024.06.07",
+    size: "66(L)",
+    color: "Blue",
+    content: "잘 입었어요.",
+    exposure: "공개",
   });
 
   const handleSave = () => {
-    console.log('저장하기');
+    console.log("저장하기");
   };
 
   const handleCancel = () => {
-    navigate('/admin/reviewlist');
+    navigate("/admin/reviewlist");
   };
 
   return (
@@ -70,9 +70,9 @@ const ReviewDetail = () => {
                   <RadioGroup>
                     <label>
                       <input
-                        type='radio'
-                        value='공개'
-                        checked={review.exposure === '공개'}
+                        type="radio"
+                        value="공개"
+                        checked={review.exposure === "공개"}
                         onChange={(e) =>
                           setReview({ ...review, exposure: e.target.value })
                         }
@@ -81,9 +81,9 @@ const ReviewDetail = () => {
                     </label>
                     <label>
                       <input
-                        type='radio'
-                        value='비공개'
-                        checked={review.exposure === '비공개'}
+                        type="radio"
+                        value="비공개"
+                        checked={review.exposure === "비공개"}
                         onChange={(e) =>
                           setReview({ ...review, exposure: e.target.value })
                         }
