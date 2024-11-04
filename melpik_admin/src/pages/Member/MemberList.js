@@ -87,7 +87,7 @@ const Content = styled.div`
 const Container = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.gray};
   padding: 20px;
-  overflow-x: auto; /* Enable horizontal scrolling if necessary */
+  overflow-x: auto;
 `;
 
 const TotalCount = styled.div`

@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import Theme from '../../styles/Theme';
 import { getAdminById } from '../../api/admin/AdminIdGet';
 import { createAdmin } from '../../api/admin/AdminPost.js';
-import { updateAdmin } from '../../api/admin/AdminIdPut.js'; // 추가: 수정 API
+import { updateAdmin } from '../../api/admin/AdminIdPut.js';
 import { deleteAdmin } from '../../api/admin/AdminIdDelete.js';
 
 const ManagerDetail = () => {
@@ -32,7 +32,7 @@ const ManagerDetail = () => {
             setManager({
               아이디: data.id,
               이메일: data.email,
-              이름: data.name || '', // 이름 데이터가 없는 경우 처리
+              이름: data.name || '',
               권한등급: data.role,
               상태: data.status === 'active' ? '정상' : '블럭',
             });
@@ -54,7 +54,6 @@ const ManagerDetail = () => {
 
     try {
       if (id === 'create') {
-        // 새로운 어드민 생성
         const createdAdmin = await createAdmin({
           id: manager.아이디,
           password: manager.비밀번호,
@@ -63,16 +62,15 @@ const ManagerDetail = () => {
           role: manager.권한등급,
           status: manager.상태 === '정상' ? 'active' : 'blocked',
         });
-        navigate('/admin'); // 생성 후 관리자 목록 페이지로 이동
+        navigate('/admin');
       } else {
-        // 기존 어드민 수정
         await updateAdmin(id, {
           email: manager.이메일,
           role: manager.권한등급,
           status: manager.상태 === '정상' ? 'active' : 'blocked',
         });
         alert('관리자가 성공적으로 수정되었습니다.');
-        navigate(`/admin/${id}`); // 수정된 경로로 이동
+        navigate(`/admin/${id}`);
       }
     } catch (error) {
       setError('어드민을 저장하는 중 오류가 발생했습니다.');
@@ -134,7 +132,7 @@ const ManagerDetail = () => {
                 name='비밀번호'
                 value={manager.비밀번호}
                 onChange={handleChange}
-                disabled={id !== 'create'} // 수정 시에는 비밀번호 입력 불가
+                disabled={id !== 'create'}
               />
             </FormRow>
             <FormRow>
@@ -144,7 +142,7 @@ const ManagerDetail = () => {
                 name='비밀번호확인'
                 value={manager.비밀번호확인}
                 onChange={handleChange}
-                disabled={id !== 'create'} // 수정 시에는 비밀번호 확인 입력 불가
+                disabled={id !== 'create'}
               />
             </FormRow>
             <FormRow>
