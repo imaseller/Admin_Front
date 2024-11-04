@@ -67,9 +67,9 @@ const List = () => {
               <SubMenuItem onClick={() => navigate('/brandlist')}>
                 브랜드 관리
               </SubMenuItem>
-              <SubMenuItem onClick={() => navigate('/schedulelist')}>
+              {/* <SubMenuItem onClick={() => navigate('/schedulelist')}>
                 예정제품 관리
-              </SubMenuItem>
+              </SubMenuItem> */}
             </SubMenu>
             <NavItem onClick={handlePaymentMenuToggle}>결제 관리</NavItem>
             <SubMenu isOpen={isPaymentMenuOpen}>
