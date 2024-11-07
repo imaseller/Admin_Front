@@ -1,37 +1,37 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { useForm, Controller } from 'react-hook-form';
-import LoginButton from '../components/Button01';
-import InputField from '../../src/components/AdminLogin/InputField.js';
-import { AdminLoginPost } from '../api/auth/AdminLoginPost.js';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { useForm, Controller } from "react-hook-form";
+import LoginButton from "../components/Button01";
+import InputField from "../../src/components/AdminLogin/InputField.js";
+import { AdminLoginPost } from "../api/auth/AdminLoginPost.js";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
+  const [modalMessage, setModalMessage] = useState("");
 
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: 'onChange',
+    mode: "onChange",
     defaultValues: {
-      Id: '',
-      password: '',
+      id: "", // 'Id' -> 'id'로 수정
+      password: "",
     },
   });
 
   const handleLoginClick = () => {
-    navigate('/admin');
+    navigate("/admin");
   };
 
   const onSubmit = async (data) => {
     const callbackFunctions = {
       navigateSuccess: handleLoginClick,
       navigateError: (errorMessage) => {
-        setModalMessage('로그인에 실패했습니다. \n' + errorMessage);
+        setModalMessage("로그인에 실패했습니다. \n" + errorMessage);
         setIsModalOpen(true);
       },
     };
@@ -40,7 +40,7 @@ const AdminLogin = () => {
       await AdminLoginPost(data, callbackFunctions);
     } catch (error) {
       console.error(error);
-      setModalMessage('로그인에 실패했습니다.');
+      setModalMessage("로그인에 실패했습니다.");
       setIsModalOpen(true);
     }
   };
@@ -57,25 +57,25 @@ const AdminLogin = () => {
           <Title>Admin</Title>
           <Controller
             control={control}
-            name='Id'
+            name="id" // 'Id' -> 'id'로 수정
             render={({ field }) => (
-              <InputField label='계정(이메일)' id='Id' type='Id' {...field} />
+              <InputField label="계정(이메일)" id="id" type="text" {...field} />
             )}
           />
           <Controller
             control={control}
-            name='password'
+            name="password"
             render={({ field }) => (
               <InputField
-                label='비밀번호'
-                id='password'
-                type='password'
+                label="비밀번호"
+                id="password"
+                type="password"
                 error={errors.password}
                 {...field}
               />
             )}
           />
-          <LoginButton type='submit'>로그인</LoginButton>
+          <LoginButton type="submit">로그인</LoginButton>
         </LoginForm>
       </LoginContainer>
       {isModalOpen && (
