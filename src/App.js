@@ -1,11 +1,13 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import Theme from "./styles/Theme";
 import Loading from "./components/Loading";
 import Header from "./components/Header";
+import Cookies from "js-cookie";
 
+// 페이지들
 const AdminLogin = React.lazy(() => import("./pages/AdminLogin"));
 const ManagerList = React.lazy(() => import("./pages/Admin/ManagerList.js"));
 const ManagerDetail = React.lazy(() =>
@@ -38,12 +40,20 @@ const List = React.lazy(() => import("./components/List.js"));
 function App() {
   const [isListVisible, setListVisible] = useState(true); // State to control List visibility
   const location = useLocation(); // Get current location
+  const token = Cookies.get("accessToken"); // Get the access token from cookies
 
   const toggleListVisibility = () => {
     setListVisible((prev) => !prev); // Toggle the visibility
   };
 
   const isLoginPage = location.pathname === "/admin/auth/login"; // Check if on login page
+
+  useEffect(() => {
+    // If no access token is present, redirect to login page
+    if (!token && location.pathname !== "/admin/auth/login") {
+      window.location.href = "/admin/auth/login"; // Redirect to login page
+    }
+  }, [token, location.pathname]);
 
   return (
     <ThemeProvider theme={Theme}>
