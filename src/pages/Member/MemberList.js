@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
-import Theme from '../../styles/Theme';
-import { UserGet } from '../../api/user/UserGet.js';
-import Header from '../../components/HeaderTitle.js';
-import MemberTable from '../../components/MemberTable.js';
-import Pagination from '../../components/Paination.js';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import Theme from "../../styles/Theme";
+import { UserGet } from "../../api/user/UserGet";
+import Header from "../../components/HeaderTitle";
+import MemberTable from "../../components/MemberTable";
+import Pagination from "../../components/Paination";
 
 const MemberList = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchType, setSearchType] = useState('email');
-  const [users, setUsers] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchType, setSearchType] = useState("email");
+  const [users, setUsers] = useState([]); // 유저 목록
+  const [total, setTotal] = useState(0); // 전체 유저 수
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
 
+  // 페이지 변경 시 API 호출
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await UserGet(page, limit);
-        setUsers(data.users || []);
-        setTotal(data.total || 0);
+        const data = await UserGet(page, limit); // 데이터 가져오기
+        setUsers(data.users); // 유저 데이터 설정
+        setTotal(data.total); // 전체 유저 수 설정
       } catch (error) {
-        console.error('Error fetching user list:', error);
+        console.error("Error fetching user list:", error);
       }
     };
 
@@ -35,15 +36,16 @@ const MemberList = () => {
   };
 
   const handleRegister = () => {
-    navigate('/user/adminnew');
+    navigate("/user/adminnew");
   };
 
+  // 검색 조건에 맞게 유저 필터링
   const filteredData = users.filter((item) => {
-    if (searchType === 'email') {
+    if (searchType === "email") {
       return item.email.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchType === 'nickname') {
+    } else if (searchType === "nickname") {
       return item.nickname.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchType === 'status') {
+    } else if (searchType === "status") {
       return item.status.toLowerCase().includes(searchTerm.toLowerCase());
     }
     return item;
@@ -53,14 +55,14 @@ const MemberList = () => {
     <ThemeProvider theme={Theme}>
       <Content>
         <Header
-          title='회원 목록'
+          title="회원 목록"
           searchType={searchType}
           setSearchType={setSearchType}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
         <Container>
-          <TotalCount>총 {total}명</TotalCount>
+          <TotalCount>총 {total}명</TotalCount> {/* 전체 유저 수 */}
           <MemberTable filteredData={filteredData} handleEdit={handleEdit} />
           <ActionButton onClick={handleRegister}>신규 등록</ActionButton>
           <Pagination
@@ -77,6 +79,7 @@ const MemberList = () => {
 
 export default MemberList;
 
+// 스타일링 부분은 그대로 유지됩니다.
 const Content = styled.div`
   padding: 10px;
   background-color: ${({ theme }) => theme.colors.white};
