@@ -58,6 +58,9 @@ const List = () => {
                   <SubMenuItem onClick={() => navigate("/user/blocked")}>
                     블록 회원 목록
                   </SubMenuItem>
+                  <SubMenuItem onClick={() => navigate("/reviewlist")}>
+                    사용후기 목록
+                  </SubMenuItem>
                 </SubMenu>
               )}
             </NavIcon>
@@ -66,6 +69,22 @@ const List = () => {
               isActive={activeMenu === "payment"}
             >
               <Icon src={PaymentIcon} alt="Payment" />
+              {activeMenu === "payment" && (
+                <SubMenu>
+                  <SubMenuItem onClick={() => navigate("/productlist")}>
+                    제품 관리
+                  </SubMenuItem>
+                  <SubMenuItem onClick={() => navigate("/brandlist")}>
+                    브랜드 관리
+                  </SubMenuItem>
+                  {/* <SubMenuItem onClick={() => navigate('/schedulelist')}>
+              예정제품 관리
+            </SubMenuItem> */}
+                  <SubMenuItem onClick={() => navigate("/Orderlist")}>
+                    주문 목록
+                  </SubMenuItem>
+                </SubMenu>
+              )}
             </NavIcon>
             <NavIcon
               onClick={() => handleMenuClick("settings")}
@@ -152,7 +171,7 @@ const SubMenu = styled.div`
   position: absolute;
   left: 70px;
   top: 0;
-  width: 200px;
+  width: 150px;
   display: flex;
   flex-direction: column;
   background: #333;
