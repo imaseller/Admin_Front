@@ -1,89 +1,71 @@
-import React, { useState } from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
-import Theme from '../styles/Theme';
+import React, { useState } from "react";
+import { useNavigate, Outlet } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import Theme from "../styles/Theme";
+import HomeIcon from "../assets/Home.svg";
+import MemberIcon from "../assets/Member.svg";
+import AdminIcon from "../assets/Admin.svg";
+import PaymentIcon from "..//assets/Payment.svg";
+import SettingIcon from "../assets/Setting.svg";
+import ListLogo from "../assets/ListLogo.svg";
 
 const List = () => {
   const navigate = useNavigate();
-  const [isManagerMenuOpen, setIsManagerMenuOpen] = useState(false);
-  const [isMemberMenuOpen, setIsMemberMenuOpen] = useState(false);
-  const [isServiceMenuOpen, setIsServiceMenuOpen] = useState(false);
-  const [isPaymentMenuOpen, setIsPaymentMenuOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState(null);
 
-  const handleManagerMenuToggle = () => {
-    setIsManagerMenuOpen(!isManagerMenuOpen);
-  };
-
-  const handleMemberMenuToggle = () => {
-    setIsMemberMenuOpen(!isMemberMenuOpen);
-  };
-
-  const handleServiceMenuToggle = () => {
-    setIsServiceMenuOpen(!isServiceMenuOpen);
-  };
-
-  const handlePaymentMenuToggle = () => {
-    setIsPaymentMenuOpen(!isPaymentMenuOpen);
+  const handleMenuClick = (menu) => {
+    setActiveMenu(activeMenu === menu ? null : menu);
   };
 
   return (
     <ThemeProvider theme={Theme}>
       <Container>
         <Sidebar>
-          <Profile>
-            <ProfileInfo>
-              <Username>관리자 (Admin)</Username>
-              <Status>Online</Status>
-            </ProfileInfo>
-          </Profile>
-          <Navigation>
-            <NavItem onClick={() => navigate('/dashboard')}>Dash Board</NavItem>
-            <NavItem onClick={handleManagerMenuToggle}>관리자 관리</NavItem>
-            <SubMenu isOpen={isManagerMenuOpen}>
-              <SubMenuItem onClick={() => navigate('/admin')}>
-                관리자 목록
-              </SubMenuItem>
-              <SubMenuItem onClick={() => navigate('/blockmanagerlist')}>
-                블럭 관리자 목록
-              </SubMenuItem>
-            </SubMenu>
-            <NavItem onClick={handleMemberMenuToggle}>회원 관리</NavItem>
-            <SubMenu isOpen={isMemberMenuOpen}>
-              <SubMenuItem onClick={() => navigate('/user')}>
-                회원 목록
-              </SubMenuItem>
-              <SubMenuItem onClick={() => navigate('/user/blocked')}>
-                블록 회원 목록
-              </SubMenuItem>
-              <SubMenuItem onClick={() => navigate('/reviewlist')}>
-                사용후기 목록
-              </SubMenuItem>
-            </SubMenu>
-            <NavItem onClick={handleServiceMenuToggle}>서비스 관리</NavItem>
-            <SubMenu isOpen={isServiceMenuOpen}>
-              <SubMenuItem onClick={() => navigate('/productlist')}>
-                제품 관리
-              </SubMenuItem>
-              <SubMenuItem onClick={() => navigate('/brandlist')}>
-                브랜드 관리
-              </SubMenuItem>
-              {/* <SubMenuItem onClick={() => navigate('/schedulelist')}>
-                예정제품 관리
-              </SubMenuItem> */}
-            </SubMenu>
-            <NavItem onClick={handlePaymentMenuToggle}>결제 관리</NavItem>
-            <SubMenu isOpen={isPaymentMenuOpen}>
-              <SubMenuItem onClick={() => navigate('/Orderlist')}>
-                주문 목록
-              </SubMenuItem>
-            </SubMenu>
-            <NavItem>앱 설정 관리</NavItem>
-            <NavItem>고객센터</NavItem>
-          </Navigation>
+          <TopBar />
+          <NavIcons>
+            <NavIcon onClick={() => navigate("/dashboard")}>
+              <Icon src={HomeIcon} alt="Home" />
+            </NavIcon>
+            <NavIcon onClick={() => handleMenuClick("manager")}>
+              <Icon src={AdminIcon} alt="Admin" />
+              {activeMenu === "manager" && (
+                <SubMenu>
+                  <SubMenuItem onClick={() => navigate("/admin")}>
+                    관리자 목록
+                  </SubMenuItem>
+                  <SubMenuItem onClick={() => navigate("/blockmanagerlist")}>
+                    블럭 관리자 목록
+                  </SubMenuItem>
+                </SubMenu>
+              )}
+            </NavIcon>
+            <NavIcon onClick={() => handleMenuClick("member")}>
+              <Icon src={MemberIcon} alt="Member" />
+              {activeMenu === "member" && (
+                <SubMenu>
+                  <SubMenuItem onClick={() => navigate("/user")}>
+                    회원 목록
+                  </SubMenuItem>
+                  <SubMenuItem onClick={() => navigate("/user/blocked")}>
+                    블록 회원 목록
+                  </SubMenuItem>
+                </SubMenu>
+              )}
+            </NavIcon>
+            <NavIcon onClick={() => handleMenuClick("payment")}>
+              <Icon src={PaymentIcon} alt="Payment" />
+            </NavIcon>
+            <NavIcon onClick={() => handleMenuClick("settings")}>
+              <Icon src={SettingIcon} alt="Settings" />
+            </NavIcon>
+          </NavIcons>
+          <BottomBar />
+          <LogoContainer>
+            <Logo src={ListLogo} alt="Logo" />
+          </LogoContainer>
         </Sidebar>
-        <MainContent>
-          <Outlet />
-        </MainContent>
+
+        <Outlet />
       </Container>
     </ThemeProvider>
   );
@@ -93,75 +75,98 @@ export default List;
 
 const Container = styled.div`
   display: flex;
+  height: 894px;
 `;
 
 const Sidebar = styled.div`
-  min-width: 250px;
-  background-color: ${({ theme }) => theme.colors.WhiteBrown6};
-  padding: 20px;
+  width: 70px;
+  background-color: #2c2c2c;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  border-radius: 0px 14px 0px 0px;
+  position: relative;
 `;
 
-const Profile = styled.div`
-  display: flex;
-  align-items: center;
+const TopBar = styled.div`
+  width: 30px;
+  height: 6px;
+  background: rgba(85, 85, 85, 0.517647);
   margin-bottom: 20px;
 `;
 
-const ProfileInfo = styled.div`
+const BottomBar = styled.div`
+  width: 30px;
+  height: 6px;
+  background: rgba(153, 153, 153, 0.517647);
+  margin-top: auto;
+  margin-bottom: 20px;
+`;
+
+const NavIcons = styled.div`
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 20px;
 `;
 
-const Username = styled.span`
-  color: ${({ theme }) => theme.colors.WhiteBrown1};
-  font-size: 14px;
-  font-weight: bold;
-`;
-
-const Status = styled.span`
-  color: #2ecc71;
-  font-size: 12px;
-`;
-
-const Navigation = styled.div`
+const NavIcon = styled.div`
+  width: 50px;
+  height: 50px;
   display: flex;
-  flex-direction: column;
-`;
-
-const NavItem = styled.div`
-  padding: 10px 0;
-  color: ${({ theme }) => theme.colors.WhiteBrown1};
+  align-items: center;
+  justify-content: center;
+  background-color: #2c2c2c;
   cursor: pointer;
+  position: relative;
   &:hover {
-    background-color: ${({ theme }) => theme.colors.WhiteBrown4};
+    background-color: #f6ac36;
   }
+`;
+
+const Icon = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
 const SubMenu = styled.div`
+  position: absolute;
+  left: 70px;
+  top: 0;
+  width: 200px;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
-  max-height: ${({ isOpen }) => (isOpen ? '200px' : '0')};
-  opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
-  transform: ${({ isOpen }) =>
-    isOpen ? 'translateY(0)' : 'translateY(-10px)'};
-  overflow: hidden;
-  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease; /* Animation effect */
+  background: #333;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  z-index: 1;
 `;
 
 const SubMenuItem = styled.div`
-  padding: 5px 0;
-  color: ${({ theme }) => theme.colors.WhiteBrown1};
+  color: #ffffff;
+  padding: 8px 12px;
   cursor: pointer;
   &:hover {
-    background-color: ${({ theme }) => theme.colors.WhiteBrown4};
+    background-color: #f6ac36;
   }
 `;
 
-const MainContent = styled.div`
-  flex: 1;
+const LogoContainer = styled.div`
+  width: 70px;
+  background: #ffffff;
+  border-top: 1px solid #dddddd;
   display: flex;
-  background-color: ${({ theme }) => theme.colors.WhiteBrown1};
+  justify-content: center;
+  padding: 20px 0;
+  border: 1px solid ${({ theme }) => theme.colors.gray};
+  border-radius: 0px 0px 14px 0px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+`;
+
+const Logo = styled.img`
+  width: 26px;
+  height: 170px;
 `;
