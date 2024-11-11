@@ -5,7 +5,7 @@ import Theme from "../styles/Theme";
 import HomeIcon from "../assets/Home.svg";
 import MemberIcon from "../assets/Member.svg";
 import AdminIcon from "../assets/Admin.svg";
-import PaymentIcon from "..//assets/Payment.svg";
+import PaymentIcon from "../assets/Payment.svg";
 import SettingIcon from "../assets/Setting.svg";
 import ListLogo from "../assets/ListLogo.svg";
 
@@ -23,10 +23,16 @@ const List = () => {
         <Sidebar>
           <TopBar />
           <NavIcons>
-            <NavIcon onClick={() => navigate("/dashboard")}>
+            <NavIcon
+              onClick={() => navigate("/dashboard")}
+              isActive={activeMenu === "dashboard"}
+            >
               <Icon src={HomeIcon} alt="Home" />
             </NavIcon>
-            <NavIcon onClick={() => handleMenuClick("manager")}>
+            <NavIcon
+              onClick={() => handleMenuClick("manager")}
+              isActive={activeMenu === "manager"}
+            >
               <Icon src={AdminIcon} alt="Admin" />
               {activeMenu === "manager" && (
                 <SubMenu>
@@ -39,7 +45,10 @@ const List = () => {
                 </SubMenu>
               )}
             </NavIcon>
-            <NavIcon onClick={() => handleMenuClick("member")}>
+            <NavIcon
+              onClick={() => handleMenuClick("member")}
+              isActive={activeMenu === "member"}
+            >
               <Icon src={MemberIcon} alt="Member" />
               {activeMenu === "member" && (
                 <SubMenu>
@@ -52,10 +61,16 @@ const List = () => {
                 </SubMenu>
               )}
             </NavIcon>
-            <NavIcon onClick={() => handleMenuClick("payment")}>
+            <NavIcon
+              onClick={() => handleMenuClick("payment")}
+              isActive={activeMenu === "payment"}
+            >
               <Icon src={PaymentIcon} alt="Payment" />
             </NavIcon>
-            <NavIcon onClick={() => handleMenuClick("settings")}>
+            <NavIcon
+              onClick={() => handleMenuClick("settings")}
+              isActive={activeMenu === "settings"}
+            >
               <Icon src={SettingIcon} alt="Settings" />
             </NavIcon>
           </NavIcons>
@@ -118,11 +133,13 @@ const NavIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #2c2c2c;
+  background-color: ${({ isActive }) => (isActive ? "#F6AE24" : "#2c2c2c")};
   cursor: pointer;
   position: relative;
+  border-radius: ${({ isActive }) => (isActive ? "10px" : "0px")};
   &:hover {
     background-color: #f6ac36;
+    border-radius: 10px;
   }
 `;
 
@@ -156,6 +173,7 @@ const SubMenuItem = styled.div`
 
 const LogoContainer = styled.div`
   width: 70px;
+  height: 270px;
   background: #ffffff;
   border-top: 1px solid #dddddd;
   display: flex;
@@ -168,5 +186,5 @@ const LogoContainer = styled.div`
 
 const Logo = styled.img`
   width: 26px;
-  height: 170px;
+  height: 200px;
 `;
