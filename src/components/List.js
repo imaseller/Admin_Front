@@ -121,6 +121,7 @@ const Sidebar = styled.div`
   padding-top: 20px;
   border-radius: 0px 14px 0px 0px;
   position: relative;
+  border-radius: 0px 0px 14px 0px;
 `;
 
 const TopBar = styled.div`

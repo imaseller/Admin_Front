@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Header = ({
   title,
@@ -13,14 +13,14 @@ const Header = ({
       <HeaderTitle>{title}</HeaderTitle>
       <SearchContainer>
         <SearchSelect onChange={(e) => setSearchType(e.target.value)}>
-          <option value='id'>아이디</option>
-          <option value='name'>이름</option>
-          <option value='email'>이메일</option>
-          <option value='role'>권한등급</option>
+          <option value="id">아이디</option>
+          <option value="name">이름</option>
+          <option value="email">이메일</option>
+          <option value="role">권한등급</option>
         </SearchSelect>
         <SearchInput
-          type='text'
-          placeholder='Search'
+          type="text"
+          placeholder="Search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
