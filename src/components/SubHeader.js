@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import NewIcon from "../assets/New.svg"; // Import custom "N" icon
+import NewIcon from "../assets/New.svg";
 
 const SubHeader = ({ title, searchTerm, setSearchTerm }) => {
   const navigate = useNavigate();
@@ -58,9 +58,9 @@ export default SubHeader;
 const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 16px;
-  background-color: ${({ theme }) => theme.colors.gray5};
-  border: 1px solid ${({ theme }) => theme.colors.gray};
+  padding: 10px 21px;
+  background: #f9f9f9;
+  border: 1px solid #dddddd;
   border-radius: 8px;
   margin-bottom: 20px;
 `;
@@ -69,9 +69,12 @@ const TabContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: auto;
-  border: 1px solid ${({ theme }) => theme.colors.gray};
+  background: #eeeeee;
+  border: 1px solid #dddddd;
+  border-radius: 8px 0px 0px 8px;
+
   border-radius: 8px;
-  overflow: visible; /* Allows NewBadge to be fully visible */
+  overflow: visible;
 `;
 
 const TabButton = styled.button`
@@ -82,8 +85,14 @@ const TabButton = styled.button`
     active ? theme.colors.primary : theme.colors.black};
   border: none;
   border-right: 1px solid ${({ theme }) => theme.colors.gray};
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 14px 27px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 13px;
+  text-align: center;
+
   cursor: pointer;
   ${({ isFirst, isLast }) =>
     isFirst
@@ -98,11 +107,11 @@ const TabButton = styled.button`
 
 const NewBadge = styled.img`
   position: absolute;
-  top: -10px; /* Adjusts position to ensure icon is fully visible */
+  top: -10px;
   right: -10px;
   width: 24px;
   height: 24px;
-  z-index: 1; /* Ensures the New icon appears on top */
+  z-index: 1;
 `;
 
 const SearchContainer = styled.div`
@@ -112,11 +121,12 @@ const SearchContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
-  padding: 8px 12px;
+  padding: 12px;
   font-size: 14px;
-  border: 1px solid ${({ theme }) => theme.colors.gray};
+  border: 1px solid #dddddd;
   border-radius: 4px;
-  width: 200px;
+  width: 230px;
+
   padding-right: 30px;
 `;
 

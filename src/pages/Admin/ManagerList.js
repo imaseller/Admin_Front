@@ -75,8 +75,9 @@ const ManagerList = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
+
+        <TotalCount>Total: {totalCount}</TotalCount>
         <Container>
-          <TotalCount>총 {totalCount}개</TotalCount>
           <AdminTable
             filteredData={filteredData}
             handleEdit={handleEdit}
@@ -107,8 +108,13 @@ const Container = styled.div`
 `;
 
 const TotalCount = styled.div`
-  font-size: ${({ theme }) => theme.fonts.default.fontSize};
-  margin-bottom: 10px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 13px;
+  margin-left: 20px;
+  margin-bottom: 19px;
   text-align: left;
   color: ${({ theme }) => theme.colors.black};
 `;
@@ -129,4 +135,9 @@ const HeaderTitle = styled.h1`
   font-size: 20px;
   font-weight: bold;
   margin: 20px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
 `;
