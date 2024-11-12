@@ -58,6 +58,12 @@ const List = () => {
                   <SubMenuItem onClick={() => navigate("/inventorylist")}>
                     인벤토리 목록
                   </SubMenuItem>
+                  <SubMenuItem onClick={() => navigate("/statisticslist")}>
+                    통계 목록
+                  </SubMenuItem>
+                  <SubMenuItem onClick={() => navigate("/calculatelist")}>
+                    정산 목록
+                  </SubMenuItem>
                 </SubMenu>
               )}
             </NavIcon>
@@ -183,9 +189,11 @@ const SubMenuItem = styled.div`
   color: #ffffff;
   padding: 8px 12px;
   cursor: pointer;
+  text-align: center;
   &:hover {
     background-color: #f6ac36;
   }
+  border-radius: 4px;
 `;
 
 const LogoContainer = styled.div`
