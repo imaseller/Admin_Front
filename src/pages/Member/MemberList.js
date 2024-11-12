@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
 import { UserGet } from "../../api/user/UserGet";
-import Header from "../../components/HeaderTitle";
+import Header from "../../components/SubHeader";
 import MemberTable from "../../components/MemberTable";
 import Pagination from "../../components/Paination";
 
@@ -54,8 +54,8 @@ const MemberList = () => {
   return (
     <ThemeProvider theme={Theme}>
       <Content>
+        <HeaderTitle>회원 목록</HeaderTitle>
         <Header
-          title="회원 목록"
           searchType={searchType}
           setSearchType={setSearchType}
           searchTerm={searchTerm}
@@ -108,4 +108,13 @@ const ActionButton = styled.button`
   color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 4px;
+`;
+
+const HeaderTitle = styled.h1`
+  ${({ theme }) => theme.fonts.heading};
+  color: ${({ theme }) => theme.colors.black};
+  font-size: 20px;
+  font-weight: bold;
+
+  margin: 20px;
 `;

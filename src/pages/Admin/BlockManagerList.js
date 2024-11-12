@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
 import { AdminBlockedGet } from "../../api/admin/AdminBlockedGet"; // 수정된 부분
 import { deleteAdmin } from "../../api/admin/AdminIdDelete";
-import Header from "../../components/HeaderTitle";
+import Header from "../../components/SubHeader";
 import AdminTable from "../../components/AdminTable";
 import Pagination from "../../components/Paination";
 

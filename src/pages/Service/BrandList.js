@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { UserGet } from "../../api/user/UserGet.js";
 import Theme from "../../styles/Theme.js";
-import Header from "../../components/HeaderTitle.js";
+import Header from "../../components/SubHeader.js";
 import Pagination from "../../components/Paination.js";
 import BrandTable from "../../components/BrandTable.js";
 
