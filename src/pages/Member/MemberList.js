@@ -5,29 +5,27 @@ import Theme from "../../styles/Theme";
 import { UserGet } from "../../api/user/UserGet";
 import SubHeader from "../../components/SubHeader";
 import MemberTable from "../../components/MemberTable";
-import Pagination from "../../components/Paination";
+import Pagination from "../../components/Pagination";
 
 const MemberList = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("email");
-  const [users, setUsers] = useState([]); // 유저 목록
-  const [total, setTotal] = useState(0); // 전체 유저 수
+  const [users, setUsers] = useState([]);
+  const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
 
-  // 페이지 변경 시 API 호출
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await UserGet(page, limit); // 데이터 가져오기
-        setUsers(data.users); // 유저 데이터 설정
-        setTotal(data.total); // 전체 유저 수 설정
+        const data = await UserGet(page, limit);
+        setUsers(data.users);
+        setTotal(data.total);
       } catch (error) {
         console.error("Error fetching user list:", error);
       }
     };
-
     fetchData();
   }, [page, limit]);
 
@@ -39,7 +37,6 @@ const MemberList = () => {
     navigate("/user/adminnew");
   };
 
-  // 검색 조건에 맞게 유저 필터링
   const filteredData = users.filter((item) => {
     if (searchType === "email") {
       return item.email.toLowerCase().includes(searchTerm.toLowerCase());
@@ -51,7 +48,6 @@ const MemberList = () => {
     return item;
   });
 
-  // 페이지 수 계산
   const totalPages = Math.ceil(total / limit);
 
   return (
@@ -64,12 +60,11 @@ const MemberList = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
+        <TotalCount>총 {total}명</TotalCount>
         <Container>
-          <TotalCount>총 {total}명</TotalCount> {/* 전체 유저 수 */}
           <MemberTable filteredData={filteredData} handleEdit={handleEdit} />
           <ActionButton onClick={handleRegister}>신규 등록</ActionButton>
         </Container>
-        {/* 페이지네이션에 totalPages를 전달 */}
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </Content>
     </ThemeProvider>
@@ -78,7 +73,6 @@ const MemberList = () => {
 
 export default MemberList;
 
-// 스타일링 부분은 그대로 유지됩니다.
 const Content = styled.div`
   padding: 10px;
   background-color: ${({ theme }) => theme.colors.white};
@@ -93,8 +87,13 @@ const Container = styled.div`
 `;
 
 const TotalCount = styled.div`
-  font-size: ${({ theme }) => theme.fonts.default.fontSize};
-  margin-bottom: 10px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 13px;
+  margin-left: 20px;
+  margin-bottom: 19px;
   text-align: left;
   color: ${({ theme }) => theme.colors.black};
 `;
@@ -115,4 +114,9 @@ const HeaderTitle = styled.h1`
   font-size: 20px;
   font-weight: bold;
   margin: 20px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
 `;

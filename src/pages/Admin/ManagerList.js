@@ -6,7 +6,7 @@ import { AdminGet } from "../../api/admin/AdminGet";
 import { deleteAdmin } from "../../api/admin/AdminIdDelete";
 import SubHeader from "../../components/SubHeader";
 import AdminTable from "../../components/AdminTable";
-import Pagination from "../../components/Paination";
+import Pagination from "../../components/Pagination";
 
 const ManagerList = () => {
   const navigate = useNavigate();

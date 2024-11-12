@@ -5,7 +5,7 @@ import Theme from "../../styles/Theme.js";
 import { UserGet } from "../../api/user/UserGet.js";
 import SubHeader from "../../components/SubHeader.js";
 import ReviewTable from "../../components/ReviewTable.js";
-import Pagination from "../../components/Paination.js";
+import Pagination from "../../components/Pagination.js";
 
 const InventoryList = () => {
   const navigate = useNavigate();

@@ -5,7 +5,7 @@ import Theme from "../../styles/Theme";
 import { UserGet } from "../../api/user/UserGet.js";
 import Header from "../../components/SubHeader.js";
 import OrderTable from "../../components/OrderTable.js";
-import Pagination from "../../components/Paination.js";
+import Pagination from "../../components/Pagination.js";
 
 const OrderList = () => {
   const navigate = useNavigate();

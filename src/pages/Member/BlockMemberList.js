@@ -5,7 +5,7 @@ import Theme from "../../styles/Theme";
 import { UserGet } from "../../api/user/UserGet.js";
 import SubHeader from "../../components/SubHeader.js";
 import MemberTable from "../../components/MemberTable.js";
-import Pagination from "../../components/Paination.js";
+import Pagination from "../../components/Pagination.js";
 
 const BlockMemberList = () => {
   const navigate = useNavigate();

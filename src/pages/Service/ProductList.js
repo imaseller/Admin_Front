@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { UserGet } from "../../api/user/UserGet.js";
 import Theme from "../../styles/Theme";
 import Header from "../../components/SubHeader";
-import Pagination from "../../components/Paination.js";
+import Pagination from "../../components/Pagination.js";
 import ProductTable from "../../components/ProductTable";
 
 const ProductList = () => {
