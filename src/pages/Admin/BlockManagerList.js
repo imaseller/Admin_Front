@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
-import { AdminBlockedGet } from "../../api/admin/AdminBlockedGet"; // 수정된 부분
+import { AdminGet } from "../../api/admin/AdminGet";
 import { deleteAdmin } from "../../api/admin/AdminIdDelete";
-import Header from "../../components/SubHeader";
+import SubHeader from "../../components/SubHeader";
 import AdminTable from "../../components/AdminTable";
 import Pagination from "../../components/Paination";
 
@@ -20,9 +20,9 @@ const BlockManagerList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await AdminBlockedGet(page, limit); // 수정된 부분
-        setAdminData(data.admins); // data.admins로 변경
-        setTotalCount(data.total); // data.total로 변경
+        const data = await AdminGet(page, limit);
+        setAdminData(data.admins);
+        setTotalCount(data.total);
       } catch (error) {
         console.error("Failed to fetch admin data:", error);
       }
@@ -63,11 +63,13 @@ const BlockManagerList = () => {
     return item;
   });
 
+  const totalPages = Math.ceil(totalCount / limit);
+
   return (
     <ThemeProvider theme={Theme}>
       <Content>
-        <Header
-          title="차단된 관리자 목록"
+        <HeaderTitle>블럭관리자 목록</HeaderTitle>
+        <SubHeader
           searchType={searchType}
           setSearchType={setSearchType}
           searchTerm={searchTerm}
@@ -83,8 +85,8 @@ const BlockManagerList = () => {
           <ActionButton onClick={() => navigate("/admin/create")}>
             신규 등록
           </ActionButton>
-          <Pagination page={page} setPage={setPage} />
         </Container>
+        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </Content>
     </ThemeProvider>
   );
@@ -119,4 +121,12 @@ const ActionButton = styled.button`
   color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 4px;
+`;
+
+const HeaderTitle = styled.h1`
+  ${({ theme }) => theme.fonts.heading};
+  color: ${({ theme }) => theme.colors.black};
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px;
 `;

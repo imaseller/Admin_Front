@@ -1,14 +1,42 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-const Pagination = ({ page, setPage }) => {
+const Pagination = ({ page, setPage, totalPages }) => {
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
   return (
     <PaginationContainer>
-      <PageButton disabled={page === 1} onClick={() => setPage(page - 1)}>
+      <PageArrow disabled={page === 1} onClick={() => setPage(1)}>
         «
-      </PageButton>
-      <PageButton>{page}</PageButton>
-      <PageButton onClick={() => setPage(page + 1)}>»</PageButton>
+      </PageArrow>
+
+      <PageArrow disabled={page === 1} onClick={() => setPage(page - 1)}>
+        ‹
+      </PageArrow>
+
+      {pages.map((num) => (
+        <PageButton
+          key={num}
+          active={num === page}
+          onClick={() => setPage(num)}
+        >
+          {num}
+        </PageButton>
+      ))}
+
+      <PageArrow
+        disabled={page === totalPages}
+        onClick={() => setPage(page + 1)}
+      >
+        ›
+      </PageArrow>
+
+      <PageArrow
+        disabled={page === totalPages}
+        onClick={() => setPage(totalPages)}
+      >
+        »
+      </PageArrow>
     </PaginationContainer>
   );
 };
@@ -18,14 +46,37 @@ export default Pagination;
 const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 5px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
 `;
 
 const PageButton = styled.button`
-  padding: 5px 10px;
+  padding: 8px 12px;
   cursor: pointer;
-  background-color: ${({ theme }) => theme.colors.WhiteBrown4};
-  color: ${({ theme }) => theme.colors.white};
-  border: none;
+  background-color: ${({ active, theme }) =>
+    active ? theme.colors.black : theme.colors.white};
+  color: ${({ active, theme }) =>
+    active ? theme.colors.white : theme.colors.darkGray};
+  border: 1px solid ${({ theme }) => theme.colors.lightGray};
   border-radius: 4px;
+
+  &:hover {
+    background-color: ${({ active, theme }) =>
+      active ? theme.colors.black : theme.colors.lightGray};
+  }
+`;
+
+const PageArrow = styled.button`
+  padding: 8px;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  background-color: transparent;
+  color: ${({ disabled, theme }) =>
+    disabled ? theme.colors.lightGray : theme.colors.darkGray};
+  border: none;
+
+  &:hover {
+    color: ${({ disabled, theme }) =>
+      disabled ? theme.colors.lightGray : theme.colors.black};
+  }
 `;

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
 import { UserGet } from "../../api/user/UserGet";
-import Header from "../../components/SubHeader";
+import SubHeader from "../../components/SubHeader";
 import MemberTable from "../../components/MemberTable";
 import Pagination from "../../components/Paination";
 
@@ -51,11 +51,14 @@ const MemberList = () => {
     return item;
   });
 
+  // 페이지 수 계산
+  const totalPages = Math.ceil(total / limit);
+
   return (
     <ThemeProvider theme={Theme}>
       <Content>
         <HeaderTitle>회원 목록</HeaderTitle>
-        <Header
+        <SubHeader
           searchType={searchType}
           setSearchType={setSearchType}
           searchTerm={searchTerm}
@@ -65,13 +68,9 @@ const MemberList = () => {
           <TotalCount>총 {total}명</TotalCount> {/* 전체 유저 수 */}
           <MemberTable filteredData={filteredData} handleEdit={handleEdit} />
           <ActionButton onClick={handleRegister}>신규 등록</ActionButton>
-          <Pagination
-            page={page}
-            setPage={setPage}
-            total={total}
-            limit={limit}
-          />
         </Container>
+        {/* 페이지네이션에 totalPages를 전달 */}
+        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </Content>
     </ThemeProvider>
   );
@@ -115,6 +114,5 @@ const HeaderTitle = styled.h1`
   color: ${({ theme }) => theme.colors.black};
   font-size: 20px;
   font-weight: bold;
-
   margin: 20px;
 `;

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
 import { UserGet } from "../../api/user/UserGet.js";
-import Header from "../../components/SubHeader.js";
+import SubHeader from "../../components/SubHeader.js";
 import MemberTable from "../../components/MemberTable.js";
 import Pagination from "../../components/Paination.js";
 
@@ -53,7 +53,7 @@ const BlockMemberList = () => {
     <ThemeProvider theme={Theme}>
       <Content>
         <HeaderTitle>회원 목록</HeaderTitle>
-        <Header
+        <SubHeader
           searchType={searchType}
           setSearchType={setSearchType}
           searchTerm={searchTerm}

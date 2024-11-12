@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme.js";
 import { UserGet } from "../../api/user/UserGet.js";
-import Header from "../../components/SubHeader.js";
+import SubHeader from "../../components/SubHeader.js";
 import ReviewTable from "../../components/ReviewTable.js";
 import Pagination from "../../components/Paination.js";
 
@@ -52,8 +52,8 @@ const InventoryList = () => {
   return (
     <ThemeProvider theme={Theme}>
       <Content>
-        <HeaderTitle>사용후기 목록</HeaderTitle>
-        <Header
+        <HeaderTitle>인벤토리 목록</HeaderTitle>
+        <SubHeader
           searchType={searchType}
           setSearchType={setSearchType}
           searchTerm={searchTerm}

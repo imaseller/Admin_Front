@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
 import { AdminGet } from "../../api/admin/AdminGet";
 import { deleteAdmin } from "../../api/admin/AdminIdDelete";
-import Header from "../../components/SubHeader";
+import SubHeader from "../../components/SubHeader";
 import AdminTable from "../../components/AdminTable";
 import Pagination from "../../components/Paination";
 
@@ -63,11 +63,13 @@ const ManagerList = () => {
     return item;
   });
 
+  const totalPages = Math.ceil(totalCount / limit);
+
   return (
     <ThemeProvider theme={Theme}>
       <Content>
-        <Header
-          title="관리자 목록"
+        <HeaderTitle>관리자 목록</HeaderTitle>
+        <SubHeader
           searchType={searchType}
           setSearchType={setSearchType}
           searchTerm={searchTerm}
@@ -83,8 +85,8 @@ const ManagerList = () => {
           <ActionButton onClick={() => navigate("/admin/create")}>
             신규 등록
           </ActionButton>
-          <Pagination page={page} setPage={setPage} />
         </Container>
+        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </Content>
     </ThemeProvider>
   );
@@ -119,4 +121,12 @@ const ActionButton = styled.button`
   color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 4px;
+`;
+
+const HeaderTitle = styled.h1`
+  ${({ theme }) => theme.fonts.heading};
+  color: ${({ theme }) => theme.colors.black};
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px;
 `;
