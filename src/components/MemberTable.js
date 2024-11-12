@@ -1,42 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const MemberTable = ({ handleEdit }) => {
+const MemberTable = ({ members, handleEdit }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const sampleData = [
-    {
-      no: 13486,
-      status: "인증",
-      rank: "일반",
-      name: "홍길동",
-      nickname: "miwin",
-      account: "stylevexx",
-      profileImage: "https://via.placeholder.com/24",
-      followers: 5480,
-      following: 397,
-      serviceRegion: "서울 - 금천구",
-      joinDate: "2024-11-15",
-    },
-    {
-      no: 13487,
-      status: "미인증",
-      rank: "VIP",
-      name: "이순신",
-      nickname: "navyking",
-      account: "admiral_lee",
-      profileImage: "https://via.placeholder.com/24",
-      followers: 10000,
-      following: 500,
-      serviceRegion: "서울 - 강남구",
-      joinDate: "2023-09-10",
-    },
-  ];
-
   const handleSelectAll = () => {
     setSelectAll(!selectAll);
-    setSelectedRows(!selectAll ? sampleData.map((member) => member.no) : []);
+    setSelectedRows(!selectAll ? members.map((member) => member.no) : []);
   };
 
   const handleRowSelect = (no) => {
@@ -71,7 +42,7 @@ const MemberTable = ({ handleEdit }) => {
           </tr>
         </thead>
         <tbody>
-          {sampleData.map((member) => (
+          {members.map((member) => (
             <tr key={member.no}>
               <td>
                 <input
@@ -111,7 +82,6 @@ export default MemberTable;
 const TableContainer = styled.div`
   width: 100%;
   min-width: 1200px;
-  margin: 20px auto;
   border: 1px solid #dddddd;
   border-radius: 4px;
   overflow: hidden;

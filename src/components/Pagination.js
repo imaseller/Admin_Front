@@ -14,15 +14,16 @@ const Pagination = ({ page, setPage, totalPages }) => {
         ‹
       </PageArrow>
 
-      {pages.map((num) => (
-        <PageButton
-          key={num}
-          active={num === page}
-          onClick={() => setPage(num)}
-        >
-          {num}
-        </PageButton>
-      ))}
+      {pages.length > 0 &&
+        pages.map((num) => (
+          <PageButton
+            key={num}
+            active={num === page}
+            onClick={() => setPage(num)}
+          >
+            {num}
+          </PageButton>
+        ))}
 
       <PageArrow
         disabled={page === totalPages}
