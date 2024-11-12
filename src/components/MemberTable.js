@@ -82,6 +82,7 @@ export default MemberTable;
 const TableContainer = styled.div`
   width: 100%;
   min-width: 1200px;
+  margin: 20px auto;
   border: 1px solid #dddddd;
   border-radius: 4px;
   overflow: hidden;
@@ -89,18 +90,33 @@ const TableContainer = styled.div`
 
 const StyledTable = styled.table`
   width: 100%;
-  border-collapse: collapse;
 
   th,
   td {
     padding: 12px;
     text-align: center;
-    border: 1px solid #dddddd;
+    vertical-align: middle;
+    border: none;
   }
 
   th {
     background: #eeeeee;
     font-weight: bold;
+    font-family: "NanumSquare Neo OTF";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+    color: #000000;
+  }
+
+  td {
+    font-family: "NanumSquare Neo OTF";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+    color: #000000;
   }
 
   th:first-child,
@@ -109,6 +125,7 @@ const StyledTable = styled.table`
   }
 
   tr {
+    border: 1px solid #dddddd;
     &:last-child td {
       border-bottom: none;
     }
@@ -122,7 +139,7 @@ const AccountCell = styled.td`
   gap: 8px;
   color: #007bff;
   cursor: pointer;
-
+  vertical-align: middle;
   &:hover {
     color: #0056b3;
   }
@@ -144,4 +161,6 @@ const Placeholder = styled.div`
 
 const AccountText = styled.span`
   color: inherit;
+  display: inline-block;
+  vertical-align: middle;
 `;
