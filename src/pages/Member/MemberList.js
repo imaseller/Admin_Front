@@ -84,7 +84,7 @@ const MemberList = () => {
         <TotalCount>총 {total}명</TotalCount>
         <Container>
           <MemberTable members={filteredData} handleEdit={handleEdit} />
-          {/* <ActionButton onClick={handleRegister}>신규 등록</ActionButton> */}
+          <ActionButton onClick={handleRegister}>신규 등록</ActionButton>
         </Container>
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </Content>
