@@ -55,11 +55,8 @@ const List = () => {
                   <SubMenuItem onClick={() => navigate("/user")}>
                     회원 목록
                   </SubMenuItem>
-                  <SubMenuItem onClick={() => navigate("/user/blocked")}>
-                    블록 회원 목록
-                  </SubMenuItem>
-                  <SubMenuItem onClick={() => navigate("/reviewlist")}>
-                    사용후기 목록
+                  <SubMenuItem onClick={() => navigate("/inventorylist")}>
+                    인벤토리 목록
                   </SubMenuItem>
                 </SubMenu>
               )}

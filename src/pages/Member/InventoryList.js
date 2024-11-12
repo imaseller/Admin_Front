@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import Theme from "../../styles/Theme";
+import Theme from "../../styles/Theme.js";
 import { UserGet } from "../../api/user/UserGet.js";
 import Header from "../../components/SubHeader.js";
 import ReviewTable from "../../components/ReviewTable.js";
 import Pagination from "../../components/Paination.js";
 
-const ReviewList = () => {
+const InventoryList = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("email");
@@ -75,7 +75,7 @@ const ReviewList = () => {
   );
 };
 
-export default ReviewList;
+export default InventoryList;
 
 const Content = styled.div`
   padding: 10px;

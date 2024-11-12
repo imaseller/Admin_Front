@@ -25,9 +25,11 @@ const MemberDetail = React.lazy(() =>
 const BlockMemberList = React.lazy(() =>
   import("../src/pages/Member/BlockMemberList.js")
 );
-const ReviewList = React.lazy(() => import("../src/pages/Member/ReviewList"));
-const ReviewDetail = React.lazy(() =>
-  import("../src/pages/Member/ReviewDetail.js")
+const InventoryList = React.lazy(() =>
+  import("../src/pages/Member/InventoryList")
+);
+const InventoryDetail = React.lazy(() =>
+  import("../src/pages/Member/InventoryDetail.js")
 );
 const ProductList = React.lazy(() => import("./pages/Service/ProductList.js"));
 const ProductDetail = React.lazy(() =>
@@ -77,8 +79,11 @@ function App() {
               <Route path="/user" element={<MemberList />} />
               <Route path="/user/detail/:seq" element={<MemberDetail />} />
               <Route path="/user/blocked" element={<BlockMemberList />} />
-              <Route path="/reviewlist" element={<ReviewList />} />
-              <Route path="/reviewlist/detail/:no" element={<ReviewDetail />} />
+              <Route path="/inventorylist" element={<InventoryList />} />
+              <Route
+                path="/inventory/detail/:no"
+                element={<InventoryDetail />}
+              />
               <Route path="/productlist" element={<ProductList />} />
               <Route
                 path="/productlist/detail/:id"
