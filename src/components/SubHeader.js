@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import NewIcon from "../assets/New.svg";
 
 const SubHeader = ({ title, searchTerm, setSearchTerm }) => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = React.useState("전체보기");
+  const location = useLocation(); // Get current location
+
+  const [activeTab, setActiveTab] = useState("");
+
+  useEffect(() => {
+    // Define getActiveTab inside the useEffect to avoid ESLint warning
+    const getActiveTab = () => {
+      if (location.pathname === "/user/all") {
+        return "전체보기";
+      } else if (location.pathname === "/user/blocked") {
+        return "블럭회원";
+      } else if (location.pathname === "/user") {
+        return "일반회원";
+      } else {
+        return "일반회원"; // Default to 일반회원 if not matched
+      }
+    };
+
+    // Set the active tab whenever location changes
+    setActiveTab(getActiveTab());
+  }, [location]); // Depend on location to trigger when the route changes
 
   const handleTabClick = (tabName, path) => {
     setActiveTab(tabName);
@@ -18,7 +38,7 @@ const SubHeader = ({ title, searchTerm, setSearchTerm }) => {
       <TabContainer>
         <TabButton
           active={activeTab === "전체보기"}
-          onClick={() => handleTabClick("전체보기", "/user")}
+          onClick={() => handleTabClick("전체보기", "/user/all")}
           isFirst
         >
           전체보기
@@ -72,8 +92,6 @@ const TabContainer = styled.div`
   background: #eeeeee;
   border: 1px solid #dddddd;
   border-radius: 8px 0px 0px 8px;
-
-  border-radius: 8px;
   overflow: visible;
 `;
 
@@ -92,8 +110,8 @@ const TabButton = styled.button`
   font-size: 12px;
   line-height: 13px;
   text-align: center;
-
   cursor: pointer;
+
   ${({ isFirst, isLast }) =>
     isFirst
       ? "border-top-left-radius: 8px; border-bottom-left-radius: 8px;"
@@ -126,7 +144,6 @@ const SearchInput = styled.input`
   border: 1px solid #dddddd;
   border-radius: 4px;
   width: 230px;
-
   padding-right: 30px;
 `;
 
