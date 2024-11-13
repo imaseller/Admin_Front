@@ -46,7 +46,7 @@ export default Pagination;
 
 const PaginationContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
   gap: 8px;
   margin-top: 20px;
