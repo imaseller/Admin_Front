@@ -54,10 +54,6 @@ const MemberList = () => {
     navigate(`/user/admin${no}`);
   };
 
-  const handleRegister = () => {
-    navigate("/user/adminnew");
-  };
-
   const filteredData = users.filter((item) => {
     if (searchType === "email") {
       return item.account.toLowerCase().includes(searchTerm.toLowerCase());
@@ -84,7 +80,6 @@ const MemberList = () => {
         <TotalCount>총 {total}명</TotalCount>
         <Container>
           <MemberTable members={filteredData} handleEdit={handleEdit} />
-          <ActionButton onClick={handleRegister}>신규 등록</ActionButton>
         </Container>
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </Content>
@@ -113,18 +108,9 @@ const TotalCount = styled.div`
   line-height: 13px;
   margin-left: 20px;
   margin-bottom: 19px;
+  margin-top: 34px;
   text-align: left;
   color: ${({ theme }) => theme.colors.black};
-`;
-
-const ActionButton = styled.button`
-  margin-right: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-  background-color: ${({ theme }) => theme.colors.WhiteBrown4};
-  color: ${({ theme }) => theme.colors.white};
-  border: none;
-  border-radius: 4px;
 `;
 
 const HeaderTitle = styled.h1`

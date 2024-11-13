@@ -84,7 +84,7 @@ export default MemberTable;
 const TableContainer = styled.div`
   width: 100%;
   min-width: 1200px;
-  margin: 20px auto;
+
   border: 1px solid #dddddd;
   border-radius: 4px;
   overflow: hidden;
@@ -106,7 +106,7 @@ const StyledTable = styled.table`
     font-weight: bold;
     font-family: "NanumSquare Neo OTF";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 800;
     font-size: 12px;
     line-height: 13px;
     color: #000000;
