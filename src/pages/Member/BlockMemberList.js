@@ -95,6 +95,7 @@ const TotalCount = styled.div`
   line-height: 13px;
   margin-left: 20px;
   margin-bottom: 19px;
+  margin-top: 34px;
   text-align: left;
   color: ${({ theme }) => theme.colors.black};
 `;

@@ -21,8 +21,9 @@ const ManagerList = () => {
     const fetchData = async () => {
       try {
         const data = await AdminGet(page, limit);
-        setAdminData(data.admins);
-        setTotalCount(data.total);
+        setAdminData(data.admins); // admins 배열을 상태로 설정
+        setTotalCount(data.total); // 전체 항목 수 설정
+        console.log("Fetched admin data:", data.admins); // 확인용 로그
       } catch (error) {
         console.error("Failed to fetch admin data:", error);
       }

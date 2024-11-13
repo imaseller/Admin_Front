@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const AdminTable = ({ filteredData, handleEdit, handleDelete }) => {
   return (
@@ -48,28 +48,61 @@ const Table = styled.table`
   border-collapse: collapse;
   margin-bottom: 20px;
   background-color: #fff;
-  border: 1px solid ${({ theme }) => theme.colors.gray};
+  border: 1px solid #dddddd;
 
   th,
   td {
-    padding: 12px 0px;
-    text-align: left;
-    min-width: 60px;
-    border-bottom: 1px solid #ddd;
-    border: 1px solid ${({ theme }) => theme.colors.gray};
-    text-align: center;
+    padding: 12px;
+    text-align: center; /* Center to Left alignment */
+    vertical-align: middle;
+    border: none;
   }
 
   th {
-    background-color: ${({ theme }) => theme.colors.WhiteBrown1};
+    background-color: #eeeeee;
+    font-weight: bold;
+    font-family: "NanumSquare Neo OTF";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 13px;
+    color: #000000;
+  }
+
+  td {
+    font-family: "NanumSquare Neo OTF";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+    color: #000000;
+  }
+
+  th:first-child,
+  td:first-child {
+    width: 40px;
+  }
+
+  tr {
+    border: 1px solid #dddddd;
+    &:last-child td {
+      border-bottom: none;
+    }
   }
 `;
 
 const EmailCell = styled.td`
   cursor: pointer;
-  color: ${({ theme }) => theme.colors.blue};
+  color: #007bff;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 150px; /* 계정 셀과 비슷한 너비로 설정 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
   &:hover {
-    color: ${({ theme }) => theme.colors.darkBlue};
+    color: #0056b3;
   }
 `;
 
@@ -77,8 +110,13 @@ const ActionButton = styled.button`
   margin-right: 5px;
   padding: 5px 10px;
   cursor: pointer;
-  background-color: ${({ theme }) => theme.colors.WhiteBrown4};
-  color: ${({ theme }) => theme.colors.white};
-  border: none;
+  background-color: #eeeeee;
+  color: #000000;
+  border: 1px solid #dddddd;
   border-radius: 4px;
+
+  &:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+  }
 `;
