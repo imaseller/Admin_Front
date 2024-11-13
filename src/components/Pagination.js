@@ -60,7 +60,6 @@ const PageButton = styled.button`
   color: ${({ active, theme }) =>
     active ? theme.colors.white : theme.colors.darkGray};
   border: 1px solid ${({ theme }) => theme.colors.lightGray};
-  border-radius: 4px;
 
   &:hover {
     background-color: ${({ active, theme }) =>
@@ -75,6 +74,7 @@ const PageArrow = styled.button`
   color: ${({ disabled, theme }) =>
     disabled ? theme.colors.lightGray : theme.colors.darkGray};
   border: none;
+  font-size: 30px;
 
   &:hover {
     color: ${({ disabled, theme }) =>
