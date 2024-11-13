@@ -96,7 +96,7 @@ const StyledTable = styled.table`
   th,
   td {
     padding: 12px;
-    text-align: center;
+    text-align: center; /* Center to Left alignment */
     vertical-align: middle;
     border: none;
   }
@@ -137,7 +137,7 @@ const StyledTable = styled.table`
 const AccountCell = styled.td`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
   color: #007bff;
   cursor: pointer;
