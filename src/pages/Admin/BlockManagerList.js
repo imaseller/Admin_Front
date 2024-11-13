@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
-import { AdminGet } from "../../api/admin/AdminGet";
+import { AdminBlockedGet } from "../../api/admin/AdminBlockedGet.js";
 import { deleteAdmin } from "../../api/admin/AdminIdDelete";
 import SubHeader from "../../components/SubHeader";
 import AdminTable from "../../components/AdminTable";
@@ -20,7 +20,7 @@ const BlockManagerList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await AdminGet(page, limit);
+        const data = await AdminBlockedGet(page, limit);
         setAdminData(data.admins);
         setTotalCount(data.total);
       } catch (error) {
