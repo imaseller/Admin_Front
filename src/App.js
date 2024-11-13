@@ -3,11 +3,9 @@ import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import Theme from "./styles/Theme";
-// import Loading from "./components/Loading";
 import Header from "./components/Header";
 import Cookies from "js-cookie";
 
-// 페이지들 (동기식 import로 변경)
 import AdminLogin from "./pages/AdminLogin";
 import ManagerList from "./pages/Admin/ManagerList.js";
 import ManagerDetail from "../src/pages/Admin/ManagerDetail.js";
@@ -24,33 +22,39 @@ import OrderList from "./pages/Payment/OrderList.js";
 import List from "./components/List.js";
 
 function App() {
-  const [isListVisible, setListVisible] = useState(true); // State to control List visibility
-  const location = useLocation(); // Get current location
-  const token = Cookies.get("accessToken"); // Get the access token from cookies
+  const [isListVisible, setListVisible] = useState(true);
+  const location = useLocation();
+  const token = Cookies.get("accessToken");
 
   const toggleListVisibility = () => {
-    setListVisible((prev) => !prev); // Toggle the visibility
+    setListVisible((prev) => !prev);
   };
 
-  const isLoginPage = location.pathname === "/admin/auth/login"; // Check if on login page
+  const isLoginPage = location.pathname === "/admin/auth/login";
 
   useEffect(() => {
-    // If no access token is present, redirect to login page
     if (!token && location.pathname !== "/admin/auth/login") {
-      window.location.href = "/admin/auth/login"; // Redirect to login page
+      window.location.href = "/admin/auth/login";
     }
   }, [token, location.pathname]);
+
+  const handleLogout = () => {
+    Cookies.remove("accessToken");
+    window.location.href = "/admin/auth/login";
+  };
 
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
-      {isLoginPage ? null : <Header onToggle={toggleListVisibility} />}{" "}
-      {/* Conditionally render Header */}
+      {!isLoginPage && (
+        <Header
+          userName="유민기"
+          onToggle={toggleListVisibility}
+          onLogout={handleLogout}
+        />
+      )}
       <AppContainer>
-        <div>
-          {/* Conditionally render List */}
-          {!isLoginPage && isListVisible && <List />}
-        </div>
+        <div>{!isLoginPage && isListVisible && <List />}</div>
         <MainContent>
           <Routes>
             <Route
@@ -79,14 +83,13 @@ function App() {
 
 const AppContainer = styled.div`
   display: flex;
-  height: 100vh; /* Full height to ensure both List and MainContent fit */
+  height: 100vh;
 `;
 
 const MainContent = styled.div`
   flex: 1;
   padding: 20px;
-
-  overflow-y: auto; /* Allows scrolling if content exceeds viewport */
+  overflow-y: auto;
 `;
 
 export default App;
