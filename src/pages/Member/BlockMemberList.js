@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
-import { UserGet } from "../../api/user/UserGet.js";
-import SubHeader from "../../components/SubHeader.js";
-import MemberTable from "../../components/MemberTable.js";
-import Pagination from "../../components/Pagination.js";
+import SubHeader from "../../components/SubHeader";
+import MemberTable from "../../components/MemberTable";
+import Pagination from "../../components/Pagination";
 
 const BlockMemberList = () => {
   const navigate = useNavigate();
@@ -17,18 +16,26 @@ const BlockMemberList = () => {
   const [limit] = useState(10);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await UserGet(page, limit);
-        setUsers(data.users || []);
-        setTotal(data.total || 0);
-      } catch (error) {
-        console.error("Error fetching user list:", error);
-      }
-    };
+    // 샘플 데이터를 직접 설정
+    const sampleData = [
+      {
+        no: 13487,
+        status: "미인증",
+        rank: "VIP",
+        name: "이순신",
+        nickname: "navyking",
+        account: "admiral_lee",
+        profileImage: "https://via.placeholder.com/24",
+        followers: 10000,
+        following: 500,
+        serviceRegion: "서울 - 강남구",
+        joinDate: "2023-09-10",
+      },
+    ];
 
-    fetchData();
-  }, [page, limit]);
+    setUsers(sampleData);
+    setTotal(sampleData.length); // total은 샘플 데이터의 길이로 설정
+  }, []);
 
   const handleEdit = (no) => {
     navigate(`/user/admin${no}`);
@@ -40,7 +47,7 @@ const BlockMemberList = () => {
 
   const filteredData = users.filter((item) => {
     if (searchType === "email") {
-      return item.email.toLowerCase().includes(searchTerm.toLowerCase());
+      return item.account.toLowerCase().includes(searchTerm.toLowerCase());
     } else if (searchType === "nickname") {
       return item.nickname.toLowerCase().includes(searchTerm.toLowerCase());
     } else if (searchType === "status") {
@@ -48,6 +55,8 @@ const BlockMemberList = () => {
     }
     return item;
   });
+
+  const totalPages = Math.ceil(total / limit);
 
   return (
     <ThemeProvider theme={Theme}>
@@ -59,17 +68,12 @@ const BlockMemberList = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
+        <TotalCount>총 {total}명</TotalCount>
         <Container>
-          <TotalCount>총 {total}명</TotalCount>
-          <MemberTable filteredData={filteredData} handleEdit={handleEdit} />
+          <MemberTable members={filteredData} handleEdit={handleEdit} />
           <ActionButton onClick={handleRegister}>신규 등록</ActionButton>
-          <Pagination
-            page={page}
-            setPage={setPage}
-            total={total}
-            limit={limit}
-          />
         </Container>
+        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </Content>
     </ThemeProvider>
   );
@@ -85,14 +89,17 @@ const Content = styled.div`
 `;
 
 const Container = styled.div`
-  border: 2px solid ${({ theme }) => theme.colors.gray};
-  padding: 20px;
-  overflow-x: auto; /* Enable horizontal scrolling if necessary */
+  overflow-x: auto;
 `;
 
 const TotalCount = styled.div`
-  font-size: ${({ theme }) => theme.fonts.default.fontSize};
-  margin-bottom: 10px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 13px;
+  margin-left: 20px;
+  margin-bottom: 19px;
   text-align: left;
   color: ${({ theme }) => theme.colors.black};
 `;
@@ -112,6 +119,10 @@ const HeaderTitle = styled.h1`
   color: ${({ theme }) => theme.colors.black};
   font-size: 20px;
   font-weight: bold;
-
   margin: 20px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
 `;

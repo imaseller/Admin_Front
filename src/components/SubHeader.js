@@ -32,12 +32,12 @@ const SubHeader = ({ title, searchTerm, setSearchTerm }) => {
           {activeTab === "일반회원" && <NewBadge src={NewIcon} alt="New" />}
         </TabButton>
         <TabButton
-          active={activeTab === "블랙회원"}
-          onClick={() => handleTabClick("블랙회원", "/user/blocked")}
+          active={activeTab === "블럭회원"}
+          onClick={() => handleTabClick("블럭회원", "/user/blocked")}
           isLast
         >
-          블랙회원
-          {activeTab === "블랙회원" && <NewBadge src={NewIcon} alt="New" />}
+          블럭회원
+          {activeTab === "블럭회원" && <NewBadge src={NewIcon} alt="New" />}
         </TabButton>
       </TabContainer>
       <SearchContainer>

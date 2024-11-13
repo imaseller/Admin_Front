@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const MemberTable = ({ members, handleEdit }) => {
+const MemberTable = ({ members = [], handleEdit }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
+  // Handle select all logic
   const handleSelectAll = () => {
     setSelectAll(!selectAll);
     setSelectedRows(!selectAll ? members.map((member) => member.no) : []);
   };
 
+  // Handle row selection logic
   const handleRowSelect = (no) => {
     setSelectedRows((prevSelected) =>
       prevSelected.includes(no)
