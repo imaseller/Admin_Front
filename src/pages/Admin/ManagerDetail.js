@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
-import { getAdminById } from "../../api/admin/AdminIdGet";
-import { createAdmin } from "../../api/admin/AdminPost.js";
-import { updateAdmin } from "../../api/admin/AdminIdPut.js";
-import { deleteAdmin } from "../../api/admin/AdminIdDelete.js";
+import { getAdminById } from "../../api/AdminApi";
+import { createAdmin } from "../../api/AdminApi";
+import { updateAdmin } from "../../api/AdminApi";
+import { deleteAdmin } from "../../api/AdminApi";
 
 const ManagerDetail = () => {
   const { id } = useParams();
