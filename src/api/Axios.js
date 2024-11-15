@@ -9,11 +9,17 @@ export const Axios = axios.create({
 // 토큰 갱신 함수
 const refreshAccessToken = async () => {
   try {
+    const refreshToken = Cookies.get("refreshToken");
+    if (!refreshToken) {
+      throw new Error("리프레시 토큰이 없습니다.");
+    }
+
     const response = await axios.post(
       "https://api.stylewh.com/admin/auth/refresh",
-      {},
+      { refreshToken: refreshToken }, // 리프레시 토큰을 바디에 포함
       { withCredentials: true }
     );
+
     const newAccessToken = response.data.accessToken;
     if (newAccessToken) {
       Cookies.set("accessToken", newAccessToken, { expires: 7, path: "/" });
@@ -30,7 +36,7 @@ Axios.interceptors.request.use(
   (config) => {
     const accessToken = Cookies.get("accessToken");
     if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers.Authorization = `Bearer ${accessToken}`; // 요청 헤더에 accessToken 포함
     }
     return config;
   },
