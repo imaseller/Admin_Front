@@ -82,6 +82,7 @@ const AdminList = ({ title }) => {
   return (
     <ThemeProvider theme={Theme}>
       <Content>
+        <HeaderTitle>회원 목록</HeaderTitle>
         <HeaderContainer>
           <TabContainer>
             <TabButton
@@ -165,9 +166,15 @@ const Container = styled.div`
 `;
 
 const TotalCount = styled.div`
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
   font-weight: 900;
   font-size: 12px;
-  margin: 10px 0;
+  line-height: 13px;
+  margin-left: 20px;
+  margin-bottom: 19px;
+  margin-top: 34px;
+  text-align: left;
   color: ${({ theme }) => theme.colors.black};
 `;
 
@@ -256,4 +263,17 @@ const SearchIcon = styled(FiSearch)`
   right: 10px;
   color: ${({ theme }) => theme.colors.grayDark};
   font-size: 16px;
+`;
+
+const HeaderTitle = styled.h1`
+  ${({ theme }) => theme.fonts.heading};
+  color: ${({ theme }) => theme.colors.black};
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
 `;

@@ -10,7 +10,7 @@ import AdminLogin from "./pages/AdminLogin";
 import ManagerList from "./pages/Admin/AdminList.js";
 import AdminList from "./pages/Admin/AdminList.js";
 import ManagerDetail from "../src/pages/Admin/ManagerDetail.js";
-import BlockManagerList from "./pages/Admin/BlockManagerList.js";
+
 import MemberList from "../src/pages/Member/MemberList.js";
 import MemberDetail from "../src/pages/Member/MemberDetail.js";
 import BlockMemberList from "../src/pages/Member/BlockMemberList.js";
@@ -80,7 +80,6 @@ function App() {
               }
             />
             <Route path="/admin/:id" element={<ManagerDetail />} />
-            <Route path="/blockmanagerlist" element={<BlockManagerList />} />
             <Route path="/user" element={<MemberList />} />
             <Route path="/user/detail/:seq" element={<MemberDetail />} />
             <Route path="/user/blocked" element={<BlockMemberList />} />

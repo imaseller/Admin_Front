@@ -39,9 +39,6 @@ const List = () => {
                   <SubMenuItem onClick={() => navigate("/admin")}>
                     관리자 목록
                   </SubMenuItem>
-                  <SubMenuItem onClick={() => navigate("/blockmanagerlist")}>
-                    블럭 관리자 목록
-                  </SubMenuItem>
                 </SubMenu>
               )}
             </NavIcon>
