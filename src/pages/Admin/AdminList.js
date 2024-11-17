@@ -16,7 +16,7 @@ import NewIcon from "../../assets/New.svg";
 const AdminList = ({ title }) => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchType, setSearchType] = useState("id");
+  const [searchType] = useState("id");
   const [adminData, setAdminData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1);
