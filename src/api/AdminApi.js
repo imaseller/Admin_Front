@@ -20,6 +20,24 @@ export const fetchAdminList = async (page = 1, limit = 10) => {
 };
 
 /**
+ * 활성화된 관리자 목록을 가져오는 API 함수
+ * @param {number} page - 페이지 번호
+ * @param {number} limit - 페이지당 항목 수
+ * @returns {Promise<Object>} - 활성화된 관리자 목록 데이터와 전체 항목 수를 반환하는 Promise
+ */
+export const fetchActiveAdminList = async (page = 1, limit = 10) => {
+  try {
+    const response = await Axios.get("/admin/active", {
+      params: { page, limit },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching active admin list:", error);
+    throw error;
+  }
+};
+
+/**
  * 차단된 관리자 목록을 가져오는 API 함수
  * @param {number} page - 페이지 번호
  * @param {number} limit - 페이지당 항목 수
@@ -131,6 +149,42 @@ export const AdminGet = async (page = 1, limit = 10) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching admin list:", error);
+    throw error;
+  }
+};
+
+/**
+ * 관리자 목록을 가져오는 API 함수 (활성화된 상태)
+ * @param {number} page - 페이지 번호
+ * @param {number} limit - 페이지당 항목 수
+ * @returns {Promise<Object>} - 활성화된 관리자 목록 데이터와 전체 항목 수를 반환하는 Promise
+ */
+export const fetchActiveAdmins = async (page = 1, limit = 10) => {
+  try {
+    const response = await Axios.get("/admin/active", {
+      params: { page, limit },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching active admins:", error);
+    throw error;
+  }
+};
+
+/**
+ * 관리자 목록을 가져오는 API 함수 (차단된 상태)
+ * @param {number} page - 페이지 번호
+ * @param {number} limit - 페이지당 항목 수
+ * @returns {Promise<Object>} - 차단된 관리자 목록 데이터와 전체 항목 수를 반환하는 Promise
+ */
+export const fetchBlockedAdmins = async (page = 1, limit = 10) => {
+  try {
+    const response = await Axios.get("/admin/blocked", {
+      params: { page, limit },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching blocked admins:", error);
     throw error;
   }
 };

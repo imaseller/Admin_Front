@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
-import { AdminGet } from "../../api/AdminApi";
+import { fetchActiveAdmins } from "../../api/AdminApi";
 import { deleteAdmin } from "../../api/AdminApi";
 import SubHeader from "../../components/SubHeader";
 import AdminTable from "../../components/AdminTable";
@@ -20,7 +20,7 @@ const ManagerList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await AdminGet(page, limit);
+        const data = await fetchActiveAdmins(page, limit);
         setAdminData(data.admins); // admins 배열을 상태로 설정
         setTotalCount(data.total); // 전체 항목 수 설정
         console.log("Fetched admin data:", data.admins); // 확인용 로그
