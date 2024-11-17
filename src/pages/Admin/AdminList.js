@@ -82,7 +82,7 @@ const AdminList = ({ title }) => {
   return (
     <ThemeProvider theme={Theme}>
       <Content>
-        <HeaderTitle>회원 목록</HeaderTitle>
+        <HeaderTitle>관리자 목록</HeaderTitle>
         <HeaderContainer>
           <TabContainer>
             <TabButton
