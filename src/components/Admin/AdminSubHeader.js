@@ -2,24 +2,31 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate, useLocation } from "react-router-dom";
-import NewIcon from "../assets/New.svg";
+import NewIcon from "../../assets/New.svg";
 
-const SubHeader = ({ searchTerm, setSearchTerm }) => {
+const SubHeader = ({ title, searchTerm, setSearchTerm }) => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation(); // Get current location
 
   const [activeTab, setActiveTab] = useState("");
 
   useEffect(() => {
-    // 현재 경로에 따라 activeTab 설정
+    // Define getActiveTab inside the useEffect to avoid ESLint warning
     const getActiveTab = () => {
-      if (location.pathname === "/admin") return "전체보기";
-      else if (location.pathname === "/admin/active") return "일반관리자";
-      else if (location.pathname === "/admin/blocked") return "블럭관리자";
-      return "";
+      if (location.pathname === "/admin") {
+        return "전체보기";
+      } else if (location.pathname === "/blockmanagerlist") {
+        return "블럭관리자";
+      } else if (location.pathname === "/admin/active") {
+        return "일반관리자";
+      } else {
+        return "일반관리자"; // Default to 일반관리자 if not matched
+      }
     };
+
+    // Set the active tab whenever location changes
     setActiveTab(getActiveTab());
-  }, [location]);
+  }, [location]); // Depend on location to trigger when the route changes
 
   const handleTabClick = (tabName, path) => {
     setActiveTab(tabName);
@@ -32,6 +39,7 @@ const SubHeader = ({ searchTerm, setSearchTerm }) => {
         <TabButton
           active={activeTab === "전체보기"}
           onClick={() => handleTabClick("전체보기", "/admin")}
+          isFirst
         >
           전체보기
           {activeTab === "전체보기" && <NewBadge src={NewIcon} alt="New" />}
@@ -45,7 +53,8 @@ const SubHeader = ({ searchTerm, setSearchTerm }) => {
         </TabButton>
         <TabButton
           active={activeTab === "블럭관리자"}
-          onClick={() => handleTabClick("블럭관리자", "/admin/blocked")}
+          onClick={() => handleTabClick("블럭관리자", "/blockmanagerlist")}
+          isLast
         >
           블럭관리자
           {activeTab === "블럭관리자" && <NewBadge src={NewIcon} alt="New" />}
@@ -80,21 +89,37 @@ const TabContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: auto;
+  background: #eeeeee;
+  border: 1px solid #dddddd;
+  border-radius: 8px 0px 0px 8px;
+  overflow: visible;
 `;
 
 const TabButton = styled.button`
+  position: relative;
   background-color: ${({ active, theme }) =>
     active ? theme.colors.grayLight : theme.colors.white};
   color: ${({ active, theme }) =>
     active ? theme.colors.primary : theme.colors.black};
   border: none;
+  border-right: 1px solid ${({ theme }) => theme.colors.gray};
   padding: 14px 27px;
   font-family: "NanumSquare Neo OTF";
+  font-style: normal;
   font-weight: 700;
   font-size: 12px;
+  line-height: 13px;
+  text-align: center;
   cursor: pointer;
-  &:not(:last-child) {
-    border-right: 1px solid ${({ theme }) => theme.colors.gray};
+
+  ${({ isFirst, isLast }) =>
+    isFirst
+      ? "border-top-left-radius: 8px; border-bottom-left-radius: 8px;"
+      : isLast
+      ? "border-top-right-radius: 8px; border-bottom-right-radius: 8px;"
+      : ""}
+  &:last-child {
+    border-right: none;
   }
 `;
 
@@ -104,6 +129,7 @@ const NewBadge = styled.img`
   right: -10px;
   width: 24px;
   height: 24px;
+  z-index: 1;
 `;
 
 const SearchContainer = styled.div`
@@ -114,9 +140,11 @@ const SearchContainer = styled.div`
 
 const SearchInput = styled.input`
   padding: 12px;
+  font-size: 14px;
   border: 1px solid #dddddd;
   border-radius: 4px;
   width: 230px;
+  padding-right: 30px;
 `;
 
 const SearchIcon = styled(FiSearch)`
