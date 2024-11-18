@@ -16,7 +16,7 @@ export const fetchUserList = async (page = 1, limit = 10) => {
 // 활성 사용자 목록 조회
 export const fetchActiveUserList = async (page = 1, limit = 10) => {
   try {
-    const response = await Axios.get("/user/", {
+    const response = await Axios.get("/user/actived", {
       params: { page, limit, status: "active" },
     });
     return response.data;

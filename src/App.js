@@ -13,7 +13,6 @@ import ManagerDetail from "../src/pages/Admin/ManagerDetail.js";
 
 import MemberList from "../src/pages/Member/MemberList.js";
 import MemberDetail from "../src/pages/Member/MemberDetail.js";
-import BlockMemberList from "../src/pages/Member/BlockMemberList.js";
 import InventoryList from "../src/pages/Member/InventoryList";
 import InventoryDetail from "../src/pages/Member/InventoryDetail.js";
 import ProductList from "./pages/Service/ProductList.js";
@@ -82,7 +81,6 @@ function App() {
             <Route path="/admin/:id" element={<ManagerDetail />} />
             <Route path="/user" element={<MemberList />} />
             <Route path="/user/detail/:seq" element={<MemberDetail />} />
-            <Route path="/user/blocked" element={<BlockMemberList />} />
             <Route path="/inventorylist" element={<InventoryList />} />
             <Route path="/inventory/detail/:no" element={<InventoryDetail />} />
             <Route path="/productlist" element={<ProductList />} />
