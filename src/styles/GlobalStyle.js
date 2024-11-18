@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
-import { reset } from 'styled-reset';
-import './GlobalFont.css';
+import { createGlobalStyle } from "styled-components";
+import { reset } from "styled-reset";
+import "./GlobalFont.css";
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
@@ -41,9 +41,10 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  /* Add responsiveness */
+  @media (max-width: 1366px) {
     body {
-      font-size: 12px;
+      font-size: 14px;
     }
     h1 {
       font-size: 24px;
@@ -56,6 +57,40 @@ const GlobalStyle = createGlobalStyle`
     }
     p, label {
       font-size: 14px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    body {
+      font-size: 12px;
+    }
+    h1 {
+      font-size: 20px;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    h3 {
+      font-size: 16px;
+    }
+    p, label {
+      font-size: 12px;
+    }
+  }
+
+  /* Tablet (iPad 12.9) */
+  @media (max-width: 1024px) {
+    body {
+      overflow-x: auto;
+    }
+    .table-container {
+      min-width: 800px;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    body {
+      font-size: 12px;
     }
   }
 

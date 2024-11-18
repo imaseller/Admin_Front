@@ -11,11 +11,10 @@ const SubHeader = ({ searchTerm, setSearchTerm }) => {
   const [activeTab, setActiveTab] = useState("");
 
   useEffect(() => {
-    // 현재 경로에 따라 activeTab 설정
     const getActiveTab = () => {
-      if (location.pathname === "/admin") return "전체보기";
-      else if (location.pathname === "/admin/active") return "일반관리자";
-      else if (location.pathname === "/admin/blocked") return "블럭관리자";
+      if (location.pathname === "/user") return "전체보기";
+      else if (location.pathname === "/user/active") return "일반회원";
+      else if (location.pathname === "/user/blocked") return "블럭회원";
       return "";
     };
     setActiveTab(getActiveTab());
@@ -31,24 +30,24 @@ const SubHeader = ({ searchTerm, setSearchTerm }) => {
       <TabContainer>
         <TabButton
           active={activeTab === "전체보기"}
-          onClick={() => handleTabClick("전체보기", "/admin")}
+          onClick={() => handleTabClick("전체보기", "/user")}
         >
           전체보기
           {activeTab === "전체보기" && <NewBadge src={NewIcon} alt="New" />}
         </TabButton>
         <TabButton
-          active={activeTab === "일반관리자"}
-          onClick={() => handleTabClick("일반관리자", "/admin/active")}
+          active={activeTab === "일반회원"}
+          onClick={() => handleTabClick("일반회원", "/user/active")}
         >
-          일반관리자
-          {activeTab === "일반관리자" && <NewBadge src={NewIcon} alt="New" />}
+          일반회원
+          {activeTab === "일반회원" && <NewBadge src={NewIcon} alt="New" />}
         </TabButton>
         <TabButton
-          active={activeTab === "블럭관리자"}
-          onClick={() => handleTabClick("블럭관리자", "/admin/blocked")}
+          active={activeTab === "블럭회원"}
+          onClick={() => handleTabClick("블럭회원", "/user/blocked")}
         >
-          블럭관리자
-          {activeTab === "블럭관리자" && <NewBadge src={NewIcon} alt="New" />}
+          블럭회원
+          {activeTab === "블럭회원" && <NewBadge src={NewIcon} alt="New" />}
         </TabButton>
       </TabContainer>
       <SearchContainer>
@@ -80,21 +79,35 @@ const TabContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: auto;
+  background: #eeeeee;
+  border: 1px solid #dddddd;
+  border-radius: 8px 0px 0px 8px;
+  overflow: visible;
 `;
 
 const TabButton = styled.button`
+  position: relative;
   background-color: ${({ active, theme }) =>
     active ? theme.colors.grayLight : theme.colors.white};
   color: ${({ active, theme }) =>
     active ? theme.colors.primary : theme.colors.black};
   border: none;
+  border-right: 1px solid ${({ theme }) => theme.colors.gray};
   padding: 14px 27px;
   font-family: "NanumSquare Neo OTF";
   font-weight: 700;
   font-size: 12px;
+  text-align: center;
   cursor: pointer;
-  &:not(:last-child) {
-    border-right: 1px solid ${({ theme }) => theme.colors.gray};
+
+  ${({ isFirst, isLast }) =>
+    isFirst
+      ? "border-top-left-radius: 8px; border-bottom-left-radius: 8px;"
+      : isLast
+      ? "border-top-right-radius: 8px; border-bottom-right-radius: 8px;"
+      : ""}
+  &:last-child {
+    border-right: none;
   }
 `;
 
@@ -104,6 +117,7 @@ const NewBadge = styled.img`
   right: -10px;
   width: 24px;
   height: 24px;
+  z-index: 1;
 `;
 
 const SearchContainer = styled.div`
@@ -114,9 +128,11 @@ const SearchContainer = styled.div`
 
 const SearchInput = styled.input`
   padding: 12px;
+  font-size: 14px;
   border: 1px solid #dddddd;
   border-radius: 4px;
   width: 230px;
+  padding-right: 30px;
 `;
 
 const SearchIcon = styled(FiSearch)`
