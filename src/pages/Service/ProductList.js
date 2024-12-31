@@ -1,13 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Theme from "../../styles/Theme";
-import {
-  fetchProductList,
-  fetchActiveProductList,
-  fetchBlockedProductList,
-  deleteProduct,
-} from "../../api/ProductApi";
 import ProductTable from "../../components/ProductTable";
 import Pagination from "../../components/Pagination";
 import { FiSearch } from "react-icons/fi";
@@ -17,48 +11,38 @@ const ProductList = ({ title }) => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType] = useState("productName");
-  const [productData, setProductData] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
+  const [productData] = useState([
+    // 임시 데이터 추가
+    {
+      no: 1,
+      productName: "Stylish T-shirt",
+      brand: "Brand A",
+      category: "Top",
+      color: "Red",
+      size: "M",
+      price: "₩30,000",
+      registerDate: "2023-12-01",
+      status: "Active",
+    },
+    {
+      no: 2,
+      productName: "Casual Jeans",
+      brand: "Brand B",
+      category: "Bottom",
+      color: "Blue",
+      size: "L",
+      price: "₩50,000",
+      registerDate: "2023-12-02",
+      status: "Active",
+    },
+  ]);
+  const [totalCount] = useState(productData.length); // 초기 총 개수
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [selectedTab, setSelectedTab] = useState("all");
 
-  const fetchData = useCallback(async () => {
-    try {
-      let data;
-      if (selectedTab === "all") {
-        data = await fetchProductList(page, limit);
-      } else if (selectedTab === "active") {
-        data = await fetchActiveProductList(page, limit);
-      } else if (selectedTab === "blocked") {
-        data = await fetchBlockedProductList(page, limit);
-      }
-      setProductData(data.products);
-      setTotalCount(data.total);
-    } catch (error) {
-      console.error("Failed to fetch product data:", error);
-    }
-  }, [selectedTab, page, limit]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
   const handleProductClick = (id) => {
     navigate(`/product/${id}`);
-  };
-
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("정말로 이 상품을 삭제하시겠습니까?");
-    if (confirmDelete) {
-      try {
-        await deleteProduct(id);
-        alert("상품이 성공적으로 삭제되었습니다.");
-        fetchData();
-      } catch (error) {
-        alert("상품 삭제 중 오류가 발생했습니다.");
-      }
-    }
   };
 
   const filteredData = productData.filter((item) =>
@@ -136,8 +120,6 @@ const ProductList = ({ title }) => {
 };
 
 export default ProductList;
-
-// 스타일 컴포넌트는 기존과 동일하게 유지
 
 // 스타일 컴포넌트 정의
 const Content = styled.div`

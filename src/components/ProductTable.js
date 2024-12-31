@@ -44,21 +44,46 @@ const Table = styled.table`
   border-collapse: collapse;
   margin-bottom: 20px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid ${({ theme }) => theme.colors.gray};
+  border: 1px solid #dddddd;
 
   th,
   td {
-    padding: 12px 0px;
-    text-align: left;
-    min-width: 60px;
-    border-bottom: 1px solid #ddd;
-    border: 1px solid ${({ theme }) => theme.colors.gray};
-    text-align: center;
+    padding: 12px;
+    text-align: center; /* Center to Left alignment */
+    vertical-align: middle;
+    border: none;
   }
 
   th {
-    background-color: ${({ theme }) => theme.colors.WhiteBrown1};
+    background-color: #eeeeee;
+    font-weight: bold;
+    font-family: "NanumSquare Neo OTF";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 13px;
+    color: #000000;
+  }
+
+  td {
+    font-family: "NanumSquare Neo OTF";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+    color: #000000;
+  }
+
+  th:first-child,
+  td:first-child {
+    width: 40px;
+  }
+
+  tr {
+    border: 1px solid #dddddd;
+    &:last-child td {
+      border-bottom: none;
+    }
   }
 `;
 
