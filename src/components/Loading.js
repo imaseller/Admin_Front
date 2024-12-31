@@ -1,6 +1,6 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import Theme from '../styles/Theme.js'; // default export이므로 중괄호 없이 import
+import React from "react";
+import styled, { keyframes } from "styled-components";
+import Theme from "../styles/Theme.js"; // default export이므로 중괄호 없이 import
 
 // 스피너 애니메이션
 const spin = keyframes`

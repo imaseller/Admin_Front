@@ -22,7 +22,7 @@ const MemberList = ({ title }) => {
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [selectedTab, setSelectedTab] = useState("all");
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
 
   // 탭에 따라 다른 API 호출
   const fetchData = useCallback(async () => {
@@ -89,7 +89,7 @@ const MemberList = ({ title }) => {
   return (
     <ThemeProvider theme={Theme}>
       <Content>
-        <HeaderTitle>관리자 목록</HeaderTitle>
+        <HeaderTitle>회원 목록</HeaderTitle>
         <HeaderContainer>
           <TabContainer>
             {["all", "active", "blocked"].map((tab) => (
@@ -101,8 +101,8 @@ const MemberList = ({ title }) => {
                 {tab === "all"
                   ? "전체보기"
                   : tab === "active"
-                  ? "일반관리자"
-                  : "차단 관리자"}
+                    ? "일반관리자"
+                    : "차단 관리자"}
                 {selectedTab === tab && <NewBadge src={NewIcon} alt="New" />}
               </TabButton>
             ))}
@@ -220,8 +220,8 @@ const TabButton = styled.button`
     isFirst
       ? "border-top-left-radius: 8px; border-bottom-left-radius: 8px;"
       : isLast
-      ? "border-top-right-radius: 8px; border-bottom-right-radius: 8px;"
-      : ""}
+        ? "border-top-right-radius: 8px; border-bottom-right-radius: 8px;"
+        : ""}
   &:last-child {
     border-right: none;
   }

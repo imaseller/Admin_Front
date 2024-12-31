@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const MemberTable = ({ members = [], handleEdit }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
+  const navigate = useNavigate();
 
   // Handle select all logic
   const handleSelectAll = () => {
@@ -18,6 +20,11 @@ const MemberTable = ({ members = [], handleEdit }) => {
         ? prevSelected.filter((id) => id !== no)
         : [...prevSelected, no]
     );
+  };
+
+  // Handle navigation to detail page
+  const handleNavigateToDetail = (no) => {
+    navigate(`/user/detail/${no}`);
   };
 
   return (
@@ -57,7 +64,7 @@ const MemberTable = ({ members = [], handleEdit }) => {
             <td>{member.rank}</td>
             <td>{member.name}</td>
             <td>{member.nickname}</td>
-            <AccountCell onClick={() => handleEdit(member.no)}>
+            <AccountCell onClick={() => handleNavigateToDetail(member.no)}>
               {member.profileImage ? (
                 <ProfileImage src={member.profileImage} alt="profile" />
               ) : (
@@ -79,6 +86,7 @@ const MemberTable = ({ members = [], handleEdit }) => {
 
 export default MemberTable;
 
+// 스타일 컴포넌트 정의
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
