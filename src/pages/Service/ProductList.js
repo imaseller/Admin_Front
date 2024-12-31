@@ -108,9 +108,6 @@ const ProductList = ({ title }) => {
             products={filteredData}
             onProductClick={handleProductClick}
           />
-          <ActionButton onClick={() => navigate("/product/create")}>
-            신규 등록
-          </ActionButton>
         </Container>
 
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
@@ -134,7 +131,6 @@ const Title = styled.h1`
 `;
 
 const Container = styled.div`
-  border: 2px solid ${({ theme }) => theme.colors.gray};
   padding: 20px;
 `;
 
@@ -145,20 +141,9 @@ const TotalCount = styled.div`
   font-size: 12px;
   line-height: 13px;
   margin-left: 20px;
-  margin-bottom: 19px;
   margin-top: 34px;
   text-align: left;
   color: ${({ theme }) => theme.colors.black};
-`;
-
-const ActionButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.WhiteBrown4};
-  color: ${({ theme }) => theme.colors.white};
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-top: 10px;
 `;
 
 const HeaderContainer = styled.div`
