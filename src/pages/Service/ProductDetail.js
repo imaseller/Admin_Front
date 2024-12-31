@@ -37,43 +37,50 @@ const ProductDetail = ({ product }) => {
 
   return (
     <Container>
+      <Title>제품관리</Title>
       <Header>
-        <Title>제품관리</Title>
-        <ButtonGroup>
-          {["목록이동", "정보수정", "종료처리"].map((label) => (
+        <LeftAligned>
+          <Button>목록이동</Button>
+        </LeftAligned>
+        <RightAligned>
+          {["정보수정", "종료처리"].map((label) => (
             <Button key={label}>{label}</Button>
           ))}
-        </ButtonGroup>
+        </RightAligned>
       </Header>
 
       <Section>
         <ProductInfo>
           <Subtitle>번호 {data.no}</Subtitle>
           <InfoRow>
-            {[
-              data.brand,
-              `품번 ${data.code}`,
-              `시즌 ${data.season}`,
-              `종류 ${data.type}`,
-              `사이즈 ${data.sizes.join(", ")}`,
-              `색상 ${data.color}`,
-            ].map((info, index) => (
-              <InfoText key={index}>{info}</InfoText>
-            ))}
+            <List>
+              <ImagePlaceholder />
+              <InfoColumn>
+                <InfoText>{data.brand}</InfoText>
+                <InfoText>품번 {data.code}</InfoText>
+                <InfoText>시즌 {data.season}</InfoText>
+              </InfoColumn>
+            </List>
+            <BlankLine></BlankLine>
+            <List>
+              <ImagePlaceholder />
+              <InfoColumn>
+                <InfoText>종류 {data.type}</InfoText>
+                <InfoText>사이즈 {data.sizes.join(", ")}</InfoText>
+                <InfoText>색상 {data.color}</InfoText>
+              </InfoColumn>
+            </List>
+            <BlankLine></BlankLine>
+            <List>
+              <ImagePlaceholder />
+              <InfoColumn>
+                <InfoText>리테일 {data.retailPrice}</InfoText>
+                <InfoText>판매 {data.salePrice}</InfoText>
+                <InfoText>대여 {data.rentalPrice}</InfoText>
+              </InfoColumn>
+            </List>
           </InfoRow>
         </ProductInfo>
-
-        <PriceInfo>
-          {[
-            { label: "리테일가", value: data.retailPrice },
-            { label: "판매가", value: data.salePrice },
-            { label: "대여가", value: data.rentalPrice },
-          ].map((price, index) => (
-            <PriceRow key={index}>
-              {price.label}: {price.value}
-            </PriceRow>
-          ))}
-        </PriceInfo>
       </Section>
 
       <SizeGuide>
@@ -200,22 +207,29 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border: 1px solid #ddd;
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-const Subtitle = styled.h2`
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
   margin-bottom: 10px;
 `;
 
-const ButtonGroup = styled.div`
+const Subtitle = styled.h2`
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+const LeftAligned = styled.div`
   display: flex;
-  gap: 10px;
+`;
+
+const RightAligned = styled.div`
+  display: flex;
 `;
 
 const Button = styled.button`
@@ -237,18 +251,28 @@ const ProductInfo = styled.div``;
 const InfoRow = styled.div`
   display: flex;
   gap: 20px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  /* justify-content: space-evenly; */
+  justify-content: flex-start;
+`;
+
+const InfoColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 `;
 
 const InfoText = styled.span`
   font-size: 14px;
 `;
 
-const PriceInfo = styled.div`
-  margin-top: 10px;
-`;
-
-const PriceRow = styled.div`
-  margin: 5px 0;
+const ImagePlaceholder = styled.div`
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #ddd;
+  margin-right: 20px;
 `;
 
 const SizeGuide = styled.div`
@@ -330,4 +354,14 @@ const DetailsTitle = styled.h4`
 const DetailItem = styled.li`
   font-size: 14px;
   margin-bottom: 5px;
+`;
+
+const List = styled.li`
+  display: flex;
+  width: 400px;
+`;
+
+const BlankLine = styled.li`
+  display: flex;
+  border: 1px solid #ddd;
 `;
