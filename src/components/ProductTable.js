@@ -1,21 +1,20 @@
 // src/components/ProductTable.js
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const ProductTable = ({ products, onProductClick }) => (
   <Table>
     <thead>
       <tr>
         <th>No.</th>
-        <th>제품명</th>
+        <th>스타일(품번)</th>
         <th>브랜드</th>
         <th>분류</th>
         <th>색상</th>
         <th>사이즈</th>
-        <th>리테일 금액</th>
-        <th>상태</th>
-        <th>사용</th>
+        <th>리테일가</th>
         <th>등록일</th>
+        <th>상태</th>
       </tr>
     </thead>
     <tbody>
@@ -30,9 +29,8 @@ const ProductTable = ({ products, onProductClick }) => (
           <td>{product.color}</td>
           <td>{product.size}</td>
           <td>{product.price}</td>
-          <td>{product.status}</td>
-          <td>{product.use}</td>
           <td>{product.registerDate}</td>
+          <td>{product.status}</td>
         </tr>
       ))}
     </tbody>
