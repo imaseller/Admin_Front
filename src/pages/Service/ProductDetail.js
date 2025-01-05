@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import ProductDetailSvg1 from "../../assets/ProductDetailSvg1.png";
+import ProductDetailSvg2 from "../../assets/ProductDetailSvg2.png";
+import ProductDetailSvg3 from "../../assets/ProductDetailSvg3.png";
 
 const ProductDetail = ({ product }) => {
   const mockProduct = {
@@ -54,7 +57,9 @@ const ProductDetail = ({ product }) => {
           <Subtitle>번호 {data.no}</Subtitle>
           <InfoRow>
             <List>
-              <ImagePlaceholder />
+              <SvgWrapper>
+                <StyledSvg src={ProductDetailSvg1} alt="Product Detail 1" />
+              </SvgWrapper>
               <InfoColumn>
                 <InfoText>{data.brand}</InfoText>
                 <InfoText>품번 {data.code}</InfoText>
@@ -63,7 +68,9 @@ const ProductDetail = ({ product }) => {
             </List>
             <BlankLine></BlankLine>
             <List>
-              <ImagePlaceholder />
+              <SvgWrapper>
+                <StyledSvg src={ProductDetailSvg2} alt="Product Detail 2" />
+              </SvgWrapper>
               <InfoColumn>
                 <InfoText>종류 {data.type}</InfoText>
                 <InfoText>사이즈 {data.sizes.join(", ")}</InfoText>
@@ -72,7 +79,9 @@ const ProductDetail = ({ product }) => {
             </List>
             <BlankLine></BlankLine>
             <List>
-              <ImagePlaceholder />
+              <SvgWrapper>
+                <StyledSvg src={ProductDetailSvg3} alt="Product Detail 3" />
+              </SvgWrapper>
               <InfoColumn>
                 <InfoText>리테일 {data.retailPrice}</InfoText>
                 <InfoText>판매 {data.salePrice}</InfoText>
@@ -223,9 +232,16 @@ const Title = styled.h1`
 `;
 
 const Subtitle = styled.h2`
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 13px;
+
+  color: #000000;
+  margin-left: 20px;
+  margin-bottom: 19px;
+  margin-top: 30px;
 `;
 
 const LeftAligned = styled.div`
@@ -376,3 +392,18 @@ const BlankLine = styled.li`
   display: flex;
   border: 1px solid #ddd;
 `;
+
+const SvgWrapper = styled.div`
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+`;
+
+const StyledSvg = styled.img``;
