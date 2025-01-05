@@ -207,15 +207,19 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
   padding: 10px;
   border: 1px solid #ddd;
 `;
 
 const Title = styled.h1`
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 18px;
+  margin-left: 20px;
 `;
 
 const Subtitle = styled.h2`
@@ -234,12 +238,19 @@ const RightAligned = styled.div`
 
 const Button = styled.button`
   padding: 8px 16px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   border: 1px solid #ddd;
-  cursor: pointer;
-  &:hover {
-    background-color: #eee;
-  }
+  font-size: 14px;
+  border-radius: 8px;
+
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 13px;
+  text-align: center;
+
+  color: #000000;
 `;
 
 const Section = styled.section`
