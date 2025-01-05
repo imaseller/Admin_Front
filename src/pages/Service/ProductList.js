@@ -22,7 +22,7 @@ const ProductList = ({ title }) => {
       size: "M",
       price: "₩30,000",
       registerDate: "2023-12-01",
-      status: "Active",
+      status: "등록완료",
     },
     {
       no: 2,
@@ -33,7 +33,7 @@ const ProductList = ({ title }) => {
       size: "L",
       price: "₩50,000",
       registerDate: "2023-12-02",
-      status: "Active",
+      status: "등록대기",
     },
   ]);
   const [totalCount] = useState(productData.length); // 초기 총 개수

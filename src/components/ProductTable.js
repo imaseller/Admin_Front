@@ -37,7 +37,11 @@ const ProductTable = ({ products }) => {
             <td>{product.size}</td>
             <td>{product.price}</td>
             <td>{product.registerDate}</td>
-            <td>{product.status}</td>
+            <StatusCell>
+              <StatusBadge status={product.status}>
+                {product.status}
+              </StatusBadge>
+            </StatusCell>
           </tr>
         ))}
       </tbody>
@@ -47,6 +51,7 @@ const ProductTable = ({ products }) => {
 
 export default ProductTable;
 
+// Styled Components
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -102,4 +107,36 @@ const ProductName = styled.td`
   &:hover {
     color: #0056b3;
   }
+`;
+
+const StatusCell = styled.td`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
+const StatusBadge = styled.div`
+  width: 60px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  font-family: "NanumSquare Neo OTF";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 10px;
+  line-height: 11px;
+  text-align: center;
+
+  color: #ffffff;
+  background-color: ${({ status }) =>
+    status === "등록완료"
+      ? "#3071B2"
+      : status === "등록대기"
+        ? "#CD5542"
+        : status === "판매종료"
+          ? "#AAAAAA"
+          : "#E0E0E0"};
 `;
