@@ -123,7 +123,7 @@ const ProductDetail = ({ product }) => {
       </SizeGuide>
 
       <InfoContainer>
-        <Subtitle>제품 소재 및 속성</Subtitle>
+        <Subtitle>제품 소재정보</Subtitle>
         <MaterialInfo>
           <MaterialSection>
             <SectionTitle>비침 정도</SectionTitle>
@@ -234,9 +234,9 @@ const Title = styled.h1`
 const Subtitle = styled.h2`
   font-family: "NanumSquare Neo OTF";
   font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 13px;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 15px;
 
   color: #000000;
   margin-left: 20px;
@@ -321,7 +321,6 @@ const TableData = styled.td`
 
 const InfoContainer = styled.div`
   display: flex;
-  padding: 20px;
 `;
 
 const MaterialInfo = styled.div`
