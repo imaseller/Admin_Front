@@ -131,7 +131,7 @@ const Title = styled.h1`
 `;
 
 const Container = styled.div`
-  padding: 20px;
+  margin-top: 20px;
 `;
 
 const TotalCount = styled.div`
