@@ -294,14 +294,6 @@ const InfoText = styled.span`
   font-size: 14px;
 `;
 
-const ImagePlaceholder = styled.div`
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background-color: #ddd;
-  margin-right: 20px;
-`;
-
 const SizeGuide = styled.div`
   margin-top: 20px;
 `;
